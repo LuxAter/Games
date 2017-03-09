@@ -36,3 +36,7 @@ clean:
 
 .PHONY : new
 new: clean all
+
+.PHONY : install
+install: clean all
+	cp $(NAME) ~/bin/
