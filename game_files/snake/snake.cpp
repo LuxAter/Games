@@ -140,10 +140,10 @@ void snake::Snake::FindGoal() {
     find = true;
   }
   if (find == true) {
-    goal.first = 100;
-    goal.second = 100;
+    goal.first = -1;
+    goal.second = -1;
     int minindex = -1;
-    double minval = 10000000000000000;
+    double minval = std::numeric_limits<double>::infinity();
     for (int i = 0; i < snake::grid.applepos.size(); i++) {
       if (minval > Dist(snake::grid.applepos[i])) {
         minval = Dist(snake::grid.applepos[i]);
@@ -151,15 +151,20 @@ void snake::Snake::FindGoal() {
       }
     }
     if (minindex == -1) {
+      goal.first = 5;
+      goal.second = 5;
     } else {
       goal.first = snake::grid.applepos[minindex].first;
       goal.second = snake::grid.applepos[minindex].second;
+      pessum::logging::Log("data", "(" + std::to_string(goal.first) + "," + std::to_string(goal.second) + ")");
     }
   }
+  //goal.first = 100;
+  //goal.second = 1;
 }
 
 double snake::Snake::Dist(std::pair<int, int> pos) {
   double val = 0;
-  val = sqrt(pow(pos.first - headx, 2) + pow(pos.second - heady, 2));
+  val = sqrt(pow((double)(pos.first - headx), 2) + pow((double)(pos.second - heady), 2));
   return (val);
 }

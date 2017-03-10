@@ -21,6 +21,7 @@ bool SortSnake(const snake::Snake& a, const snake::Snake& b) {
 }
 
 void snake::Game() {
+  snakes.clear();
   int width = scrwidth - 2;
   int height = scrheight - 6;
   int obsticals = 0;
@@ -78,9 +79,6 @@ void snake::Game() {
     if (apples > (width * height) / 2) {
       apples = (width * height) / 2;
     }
-    if (snakec > 5) {
-      snakec = 5;
-    }
     if (width < 10) {
       width = 10;
     }
@@ -114,6 +112,10 @@ void snake::Game() {
       SetAtt({YELLOW_TEXT}, scorewindow);
     } else if (snakes[i].color == 5) {
       SetAtt({GREEN_TEXT}, scorewindow);
+    } else if (snakes[i].color == 6) {
+      SetAtt({CYAN_BACK}, scorewindow);
+    } else if(snakes[i].color == 7){
+      SetAtt({MAGENTA_BACK}, scorewindow);
     }
     Print(str, i + 1, ((scrwidth / 5) - str.size()) / 2, scorewindow);
   }

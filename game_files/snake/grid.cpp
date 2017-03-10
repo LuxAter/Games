@@ -1,6 +1,7 @@
 #include <appareo.h>
 #include <vector>
 #include "grid.hpp"
+#include <pessum.h>
 
 using namespace appareo;
 using namespace appareo::curse;
@@ -55,6 +56,7 @@ void snake::Grid::GenApple() {
       grid[x][y] = -2;
       currentapples++;
       applepos.push_back(std::pair<int, int>(x, y));
+      pessum::logging::Log("debug", "[" + std::to_string(x) + "," + std::to_string(y) + "]");
     }
   }
 }
@@ -93,6 +95,12 @@ void snake::Grid::Show() {
           SetAtt({YELLOW_BACK}, win);
         } else if (totalgrid[i][j] == 5) {
           SetAtt({GREEN_BACK}, win);
+        } else if (totalgrid[i][j] == 6) {
+          SetAtt({CYAN_BACK}, win);
+        } else if (totalgrid[i][j] == 7) {
+          SetAtt({MAGENTA_BACK}, win);
+        } else if (totalgrid[i][j] == 8) {
+        
         }
         Print(str, j + 1, i + 1, win, false);
         if (totalgrid[i][j] == -2 || totalgrid[i][j] > 0) {
@@ -139,6 +147,7 @@ void snake::Grid::Delete() {
   grid.clear();
   snakegrid.clear();
   totalgrid.clear();
+  applepos.clear();
 }
 
 void snake::Grid::SetScoreCount(int count) { scorecount = count; }
