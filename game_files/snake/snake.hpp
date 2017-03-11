@@ -1,25 +1,15 @@
-#ifndef SANKE_SNAKES
-#define SANKE_SNAKES
+#ifndef SNAKE_SNAKE_HPP
+#define SNAKE_SNAKE_HPP
 #include <vector>
-
+#include "grid.hpp"
+#include "snake_class.hpp"
 namespace snake {
-  class Snake {
-   public:
-    void Init(int index, int size = 1);
-    void SetSpeed(int x, int y);
-    void Move();
-    void Kill();
-    void AI();
-    void FindGoal();
-    bool alive = true;
-    int score = 0, color = 1;
-
-   private:
-    int headx, heady, xspeed = 0, yspeed = 0, growsize = 1;
-    int grew = 0;
-    std::pair<int, int> goal;
-    std::vector<std::pair<int, int>> body;
-    double Dist(std::pair<int, int> pos);
-  };
+  extern Grid grid;
+  bool SortSnake(const snake::Snake& a, const snake::Snake& b);
+  void Game();
+  bool Run(int width, int height, int obsticals, int apples, int snake_count,
+           int growth);
+  bool Alive();
+  std::string GetColor(std::vector<int> color_vec);
 }
 #endif

@@ -56,7 +56,7 @@ void minesw::Grid::Show(int x, int y) {
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
       std::string str = std::to_string(displaygrid[i][j]);
-      std::vector<Attributes> atts;
+      std::vector<int> atts;
       if (i == x && j == y) {
         atts.push_back(YELLOW_BACK);
       }

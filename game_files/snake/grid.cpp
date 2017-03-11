@@ -1,109 +1,73 @@
 #include <appareo.h>
+#include <pessum.h>
 #include <vector>
 #include "grid.hpp"
-#include <pessum.h>
 
 using namespace appareo;
 using namespace appareo::curse;
 using namespace appareo::curse::out;
 using namespace appareo::induco;
 
-void snake::Grid::Init(int sizex, int sizey) {
-  grid.clear();
-  snakegrid.clear();
-  totalgrid.clear();
-  std::vector<int> col(sizey, 0);
-  for (int i = 0; i < sizex; i++) {
-    grid.push_back(col);
-  }
-  snakegrid = grid;
-  totalgrid = grid;
-  lasttotal = grid;
-  width = sizex;
-  height = sizey;
-  obsticalcount = 0;
-  applecount = 0;
-  currentapples = 0;
+snake::Grid::Grid(std::pair<int, int> size) {
+  grid = std::vector<std::vector<int>>(size.first,
+                                       std::vector<int>(size.second, 0));
+  last_grid = grid;
+  grid_size = size;
   win = windows.size();
   InitializeWindow();
-  windows[win].CreateWindow("Snake", sizex + 2, sizey + 2, -1,
-                            (scrheight - sizey + 2) / 2, true, true);
-
-  scorewin = windows.size();
+  windows[win].CreateWindow("Snake", size.first + 2, size.second + 2, -1,
+                            (scrheight - size.second + 2) / 2, true, true);
+  score_win = windows.size();
   InitializeWindow();
-  windows[scorewin].CreateWindow("Score", sizex + 2, 3, -1,
-                                 (scrheight - sizey + 2) / 2 - 3, true, true);
+  windows[score_win].CreateWindow("Score", size.first + 2, 3, -1,
+                                  (scrheight - size.second + 2) / 2 - 3, true,
+                                  true);
 }
 
-void snake::Grid::GenObsticals(int count) {
+void snake::Grid::GenObs(int count) {
   while (count > 0) {
-    int x = rand() % width;
-    int y = rand() % height;
-    if (Empty(x, y) == true) {
-      grid[x][y] = -1;
-      count--;
-    }
+    SetPos(FindFree(), -1);
+    count--;
   }
 }
 
-void snake::Grid::SetAppleCount(int count) { applecount = count; }
+void snake::Grid::SetAppleCount(int count) { apple_count = count; }
+
+void snake::Grid::SetScoreCount(int count) { score_count = count; }
 
 void snake::Grid::GenApple() {
-  while (currentapples < applecount) {
-    int x = rand() % width;
-    int y = rand() % height;
-    if (Empty(x, y) == true) {
-      grid[x][y] = -2;
-      currentapples++;
-      applepos.push_back(std::pair<int, int>(x, y));
-      pessum::logging::Log("debug", "[" + std::to_string(x) + "," + std::to_string(y) + "]");
-    }
+  while (current_apples < apple_count) {
+    std::pair<int, int> new_pos = FindFree();
+    apple_pos.push_back(new_pos);
+    SetPos(new_pos, -2);
+    current_apples++;
   }
 }
 
-void snake::Grid::SumGrids() {
-  totalgrid = grid;
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < height; j++) {
-      if (snakegrid[i][j] != 0) {
-        totalgrid[i][j] = snakegrid[i][j];
-      }
-    }
-  }
-}
-
-void snake::Grid::Show() {
-  GenApple();
-  SumGrids();
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < height; j++) {
-      if (lasttotal[i][j] != totalgrid[i][j]) {
-        lasttotal[i][j] = totalgrid[i][j];
+void snake::Grid::Display() {
+  for (int i = 0; i < grid_size.first; i++) {
+    for (int j = 0; j < grid_size.second; j++) {
+      if (last_grid[i][j] != grid[i][j]) {
+        last_grid[i][j] = grid[i][j];
         std::string str = " ";
-        if (totalgrid[i][j] == -1) {
+        if (grid[i][j] == -1) {
           str = "#";
-        } else if (totalgrid[i][j] == -2) {
-          SetAtt({GREEN_TEXT}, win);
+        } else if (grid[i][j] == -2) {
           str = "*";
-        } else if (totalgrid[i][j] == 1) {
-          SetAtt({WHITE_BACK}, win);
-        } else if (totalgrid[i][j] == 2) {
-          SetAtt({BLUE_BACK}, win);
-        } else if (totalgrid[i][j] == 3) {
-          SetAtt({RED_BACK}, win);
-        } else if (totalgrid[i][j] == 4) {
-          SetAtt({YELLOW_BACK}, win);
-        } else if (totalgrid[i][j] == 5) {
-          SetAtt({GREEN_BACK}, win);
-        } else if (totalgrid[i][j] == 6) {
-          SetAtt({CYAN_BACK}, win);
-        } else if (totalgrid[i][j] == 7) {
-          SetAtt({MAGENTA_BACK}, win);
-        } else if (totalgrid[i][j] == 8) {
-        
+          SetAtt({GREEN_TEXT}, win);
+        }
+        if (grid[i][j] > 0) {
+          std::vector<int> attrs = {};
+          int color = grid[i][j] - 1;
+          if (color > 6) {
+            color -= 6;
+            attrs.push_back(DIM);
+          }
+          attrs.push_back(color + 20);
+          SetAtt(attrs, win);
         }
         Print(str, j + 1, i + 1, win, false);
-        if (totalgrid[i][j] == -2 || totalgrid[i][j] > 0) {
+        if (grid[i][j] == -2 || grid[i][j] > 0) {
           SetAtt({NORMAL}, win);
         }
       }
@@ -112,75 +76,72 @@ void snake::Grid::Show() {
   windows[win].Update();
 }
 
-bool snake::Grid::Empty(int x, int y) {
-  if (x < width && x >= 0 && y < height && y >= 0) {
-    if (grid[x][y] == 0 && snakegrid[x][y] == 0) {
-      return (true);
-    } else {
-      return (false);
-    }
+void snake::Grid::DisplayScore(int score, int index, int color) {
+  std::vector<int> attrs = {};
+  index++;
+  if (color > 6) {
+    color -= 6;
+    attrs.push_back(DIM);
   }
-  return (false);
+  attrs.push_back(color + 12);
+  SetAtt(attrs, score_win);
+  int pos = (index * (grid_size.first / score_count)) -
+            (grid_size.first / score_count);
+  Print(std::to_string(score), 1, pos + 1, score_win, false);
+  SetAtt({NORMAL}, score_win);
+  windows[score_win].Update();
 }
 
-bool snake::Grid::Safe(int x, int y) {
-  if (x < width && x >= 0 && y < height && y >= 0) {
-    if ((grid[x][y] == 0 || grid[x][y] == -2) && (snakegrid[x][y] == 0)) {
-      return (true);
-    }
+int snake::Grid::GetPos(std::pair<int, int> pos) {
+  if (pos.first < 0 || pos.first >= grid_size.first || pos.second < 0 ||
+      pos.second >= grid_size.second) {
+    return (-3);
+  } else {
+    return (grid[pos.first][pos.second]);
   }
-  return (false);
+  return (0);
 }
 
-bool snake::Grid::Apple(int x, int y) {
-  if (x < width && x >= 0 && y < height && y >= 0) {
-    if (grid[x][y] == -2) {
-      return (true);
+void snake::Grid::SetPos(std::pair<int, int> pos, int val) {
+  if (pos.first >= 0 && pos.first < grid_size.first && pos.second >= 0 &&
+      pos.second < grid_size.second) {
+    grid[pos.first][pos.second] = val;
+  }
+}
+
+std::pair<int, int> snake::Grid::FindFree() {
+  bool searching = true;
+  std::pair<int, int> pos(0, 0);
+  while (searching == true) {
+    pos.first = rand() % grid_size.first;
+    pos.second = rand() % grid_size.second;
+    if (GetPos(pos) == 0) {
+      searching = false;
     }
   }
-  return (false);
+  return (pos);
+}
+
+void snake::Grid::Eat(std::pair<int, int> pos) {
+  for (int i = 0; i < apple_pos.size(); i++)
+    if (apple_pos[i] == pos) {
+      SetPos(pos, 0);
+      apple_pos.erase(apple_pos.begin() + i);
+      current_apples--;
+      GenApple();
+      break;
+    }
 }
 
 void snake::Grid::Delete() {
-  TerminateWindow(scorewin);
-  TerminateWindow(win);
   grid.clear();
-  snakegrid.clear();
-  totalgrid.clear();
-  applepos.clear();
+  last_grid.clear();
+  apple_pos.clear();
+  TerminateWindow(score_win);
+  TerminateWindow(win);
 }
 
-void snake::Grid::SetScoreCount(int count) { scorecount = count; }
-
-void snake::Grid::ESnake(int x, int y) { snakegrid[x][y] = 0; }
-void snake::Grid::SSnake(int x, int y, int val) { snakegrid[x][y] = val; }
-void snake::Grid::SObs(int x, int y) { grid[x][y] = -1; }
-void snake::Grid::Eat(int x, int y) {
-  if (grid[x][y] == -2) {
-    for (int i = 0; i < applepos.size(); i++) {
-      if (applepos[i].first == x && applepos[i].second == y) {
-        applepos.erase(applepos.begin() + i);
-        break;
-      }
-    }
-    grid[x][y] = 0;
-    currentapples--;
-    GenApple();
-  }
-}
-
-void snake::Grid::DisplayScore(int score, int index) {
-  if (index == 1) {
-    SetAtt({WHITE_TEXT}, scorewin);
-  } else if (index == 2) {
-    SetAtt({BLUE_TEXT}, scorewin);
-  } else if (index == 3) {
-    SetAtt({RED_TEXT}, scorewin);
-  } else if (index == 4) {
-    SetAtt({YELLOW_TEXT}, scorewin);
-  } else if (index == 5) {
-    SetAtt({GREEN_TEXT}, scorewin);
-  }
-  int pos = (index * (width / scorecount)) - (width / scorecount);
-  Print(std::to_string(score), 1, pos + 1, scorewin);
+snake::Grid::~Grid() {
+  // TerminateWindow(score_win);
+  // TerminateWindow(win);
 }
