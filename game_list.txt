@@ -1,14 +1,12 @@
   >>>>>GAMES<<<<<
 **=====TODO======**
-[ ]SNAKE
-[ ]TIC TAC TOE
-[ ]PACMAN
-[ ]SUDUKU
-[ ]FOUR IN A ROW
 [ ]CHECKERS??
 [ ]CHESS??
 [ ]FLOW/LINE CONNECTING PUZZLE
-**=====DEBUG=====**
+[ ]FOUR IN A ROW
 [X]MAZE
 [X]MINESWEEPER
-**=====DONE======**
+[ ]PACMAN
+[X]SNAKE
+[ ]SUDUKU
+[ ]TIC TAC TOE

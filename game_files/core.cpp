@@ -14,6 +14,7 @@ void game::MainMenu() {
     input = appareo::curse::NewMenu(options, "Games", scrwidth / 2,
                                     scrheight / 2)[0];
     if (input == "TIC TAC TOE") {
+      ttt::Game();
     } else if (input == "SNAKE") {
       snake::Game();
     } else if (input == "MAZE") {

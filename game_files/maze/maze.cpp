@@ -1,8 +1,5 @@
 #include <appareo.h>
 #include <pessum.h>
-#include <algorithm>
-#include <ctime>
-#include <fstream>
 #include <vector>
 #include "grid.hpp"
 #include "maze.hpp"

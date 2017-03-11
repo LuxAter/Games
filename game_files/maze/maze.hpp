@@ -1,5 +1,5 @@
-#ifndef MAZE_MAZE
-#define MAZE_MAZE
+#ifndef MAZE_MAZE_HPP
+#define MAZE_MAZE_HPP
 #include "grid.hpp"
 
 namespace maze {

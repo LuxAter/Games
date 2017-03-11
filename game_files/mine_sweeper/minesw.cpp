@@ -103,6 +103,9 @@ bool minesw::Run(int width, int height, int mines) {
     if (in == int('f')) {
       grid.Flag(currentx, currenty);
     }
+    if (in == int(' ')) {
+      return (true);
+    }
     if (grid.Compleated() == true) {
       Score();
       running = false;
