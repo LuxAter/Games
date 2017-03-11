@@ -10,6 +10,7 @@ using namespace appareo::induco;
 
 namespace snake {
   Grid grid(std::make_pair(2, 2));
+  std::string color = "1";
   std::vector<Snake> snakes;
 }
 
@@ -51,7 +52,6 @@ void snake::Game() {
   newfield.sval = std::to_string(growth);
   fields.push_back(newfield);
   while (Run(width, height, obsticals, apples, snake_count, growth) == true) {
-    grid.Delete();
     snakes.clear();
     fields = NewForm(fields, "New Game", scrwidth / 2, 8);
     width = fields[0].ival;
@@ -115,8 +115,9 @@ bool snake::Run(int width, int height, int obsticals, int apples,
   grid.SetAppleCount(apples);
   grid.GenApple();
   grid.SetScoreCount(snake_count);
-  std::vector<int> color_vec = {0};
-  for (int i = 0; i < snake_count; i++) {
+  std::vector<int> color_vec = {-1};
+  snakes.push_back(Snake(growth, color));
+  for (int i = 1; i < snake_count; i++) {
     color_vec[0]++;
     for (int j = 0; j < color_vec.size() - 1; j++) {
       if (color_vec[j] == 7) {
@@ -153,11 +154,17 @@ bool snake::Run(int width, int height, int obsticals, int apples,
     snakes[0].SetDir(std::make_pair(1, 0));
   }
   if (in == int(' ')) {
+    grid.Delete();
     return (true);
   }
   if (in == int('q')) {
     running = false;
     grid.Delete();
+  }
+  if (in == int('c')) {
+    SetColor();
+    grid.Delete();
+    return (true);
   }
   while (running == true) {
     for (int i = 0; i < snakes.size(); i++) {
@@ -186,11 +193,17 @@ bool snake::Run(int width, int height, int obsticals, int apples,
       running = false;
       grid.Delete();
     }
+    if (in == int('c')) {
+      SetColor();
+      grid.Delete();
+      return (true);
+    }
     if (in == int(' ')) {
       return (true);
     }
     if (Alive() == false) {
       running = false;
+      grid.Delete();
     }
   }
   return (false);
@@ -204,6 +217,17 @@ bool snake::Alive() {
     }
   }
   return (alive_check);
+}
+
+void snake::SetColor() {
+  std::vector<Field> fields;
+  Field newfield;
+  newfield.name = "Color Pattern[0-6]";
+  newfield.type = 4;
+  newfield.sval = color;
+  fields.push_back(newfield);
+  fields = NewForm(fields, "Set Color", scrwidth / 2, 3);
+  color = fields[0].sval;
 }
 
 std::string snake::GetColor(std::vector<int> color_vec) {
