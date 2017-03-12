@@ -8,7 +8,7 @@ using namespace appareo::curse;
 
 void game::MainMenu() {
   std::vector<std::vector<std::string>> options = {
-      {"TIC TAC TOE", "SNAKE", "MAZE", "MINE SWEEPER"}, {"QUIT"}};
+      {"TIC TAC TOE", "SNAKE", "MAZE", "MINE SWEEPER"}, {"TETRIS"}, {"QUIT"}};
   std::string input = "";
   while (input != "QUIT") {
     input = appareo::curse::NewMenu(options, "Games", scrwidth / 2,
