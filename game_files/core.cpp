@@ -21,6 +21,8 @@ void game::MainMenu() {
       maze::Game();
     } else if (input == "MINE SWEEPER") {
       minesw::Game();
+    } else if (input == "TETRIS") {
+      tetris::Game();
     }
   }
 }
