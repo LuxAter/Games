@@ -67,8 +67,6 @@ bool tetris::Run(int width, int height) {
       tetrim.Move(RIGHT, width - 1);
     } else if (in == KEY_LEFT) {
       tetrim.Move(LEFT, 0);
-    } else if (in == KEY_DOWN) {
-      tetrim.Move(DOWN, height + 1);
     } else if (in == KEY_UP) {
       tetrim.Rotate();
     }

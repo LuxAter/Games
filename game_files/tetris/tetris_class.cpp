@@ -23,7 +23,7 @@ void tetris::Tetrimino::Gen() {
     blocks = {-1, -1, 0, -1, 0, 0, -1, 0};
     center_pointer = 2;
   } else if (shape == 4) {
-    blocks = {-1, -1, 0, -1, 0, 0, 1, 0};
+    blocks = {-1, 0, 0, 0, 0, -1, 1, -1};
     center_pointer = 2;
   } else if (shape == 5) {
     blocks = {-1, 0, 0, 0, 1, 0, 0, -1};
@@ -82,6 +82,21 @@ bool tetris::Tetrimino::Move(int dir, int max) {
 void tetris::Tetrimino::Rotate() {
   if (shape == 0 || shape == 4 || shape == 6) {
   } else if (shape == 1 || shape == 2 || shape == 5) {
+    for (int i = 0; i < blocks.size(); i += 2) {
+      if (blocks[i] > 0 && blocks[i + 1] > 0) {
+        std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
+        blocks[i] *= -1;
+      } else if (blocks[i] < 0 && blocks[i + 1] > 0) {
+        // std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
+        blocks[i + 1] *= -1;
+      } else if (blocks[i] < 0 && blocks[i + 1] < 0) {
+        std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
+        blocks[i] *= -1;
+      } else if (blocks[i] > 0 && blocks[i + 1] < 0) {
+        // std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
+        blocks[i + 1] *= -1;
+      }
+    }
   }
 }
 
