@@ -8,9 +8,3 @@ all: $(OBJ_FILES) subsystem
 
 .PHONY : subsystem
 subsystem:
-	@cd four_in_a_row && $(MAKE)
-	@cd maze && $(MAKE)
-	@cd mine_sweeper && $(MAKE)
-	@cd snake && $(MAKE)
-	@cd tetris && $(MAKE)
-	@cd tic_tac_toe && $(MAKE)

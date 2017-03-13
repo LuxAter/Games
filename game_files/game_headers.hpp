@@ -3,3 +3,4 @@
 #include "snake/snake.hpp"
 #include "tetris/tetris.hpp"
 #include "tic_tac_toe/ttt.hpp"
+#include "four_in_a_row/fiar.hpp"

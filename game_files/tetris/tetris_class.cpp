@@ -84,17 +84,19 @@ void tetris::Tetrimino::Rotate() {
   } else if (shape == 1 || shape == 2 || shape == 5) {
     for (int i = 0; i < blocks.size(); i += 2) {
       if (blocks[i] > 0 && blocks[i + 1] > 0) {
-        std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
         blocks[i] *= -1;
       } else if (blocks[i] < 0 && blocks[i + 1] > 0) {
-        // std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
         blocks[i + 1] *= -1;
       } else if (blocks[i] < 0 && blocks[i + 1] < 0) {
-        std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
         blocks[i] *= -1;
       } else if (blocks[i] > 0 && blocks[i + 1] < 0) {
-        // std::iter_swap(blocks.begin() + 1, blocks.begin() + i + 1);
         blocks[i + 1] *= -1;
+      } else if (blocks[i] == 0 && blocks[i + 1] > 0){
+        
+      } else if (blocks[i] == 0 && blocks[i+1] > 0){
+      } else if (blocks[i] > 0 && blocks[i+1] == 0){
+
+      }else if(blocks[i] < 0 && blocks[i+1] == 0){
       }
     }
   }
