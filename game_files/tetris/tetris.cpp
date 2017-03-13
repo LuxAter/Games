@@ -2,6 +2,7 @@
 #include <pessum.h>
 #include <vector>
 #include "tetris.hpp"
+#include "tetris_class.hpp"
 
 using namespace appareo;
 using namespace appareo::curse;
@@ -9,71 +10,10 @@ using namespace appareo::curse::out;
 using namespace appareo::induco;
 
 namespace tetris {
-  int grid_win, next_win, level_win, score_win;
+  // std::vector<Tetrimino> tetriminos;
   std::vector<std::vector<int>> grid, last_grid;
+  std::vector<int> win;
 }
-
-void tetris::Tetrimino::Gen() {
-  index = (rand() % 7) + 1;
-  int grid_center = grid.size() / 2;
-  if (index == 1) {
-    // ####
-    //
-    blocks[0] = std::make_pair(grid_center - 2, 1);
-    blocks[1] = std::make_pair(grid_center - 1, 1);
-    blocks[2] = std::make_pair(grid_center, 1);
-    blocks[3] = std::make_pair(grid_center + 1, 1);
-  } else if (index == 2) {
-    // ###
-    //   #
-    blocks[0] = std::make_pair(grid_center - 1, 0);
-    blocks[1] = std::make_pair(grid_center, 0);
-    blocks[2] = std::make_pair(grid_center + 1, 0);
-    blocks[3] = std::make_pair(grid_center + 1, 1);
-  } else if (index == 3) {
-    // ###
-    // #
-    blocks[0] = std::make_pair(grid_center - 1, 0);
-    blocks[1] = std::make_pair(grid_center, 0);
-    blocks[2] = std::make_pair(grid_center + 1, 0);
-    blocks[3] = std::make_pair(grid_center - 1, 1);
-  } else if (index == 4) {
-    // ##
-    // ##
-    blocks[0] = std::make_pair(grid_center - 1, 0);
-    blocks[1] = std::make_pair(grid_center - 1, 1);
-    blocks[2] = std::make_pair(grid_center, 0);
-    blocks[3] = std::make_pair(grid_center, 1);
-  } else if (index == 5) {
-    //  ##
-    // ##
-    blocks[0] = std::make_pair(grid_center - 1, 1);
-    blocks[1] = std::make_pair(grid_center, 1);
-    blocks[2] = std::make_pair(grid_center, 0);
-    blocks[3] = std::make_pair(grid_center + 1, 0);
-  } else if (index == 6) {
-    // ###
-    //  #
-    blocks[0] = std::make_pair(grid_center - 1, 0);
-    blocks[1] = std::make_pair(grid_center, 0);
-    blocks[2] = std::make_pair(grid_center + 1, 0);
-    blocks[3] = std::make_pair(grid_center, 1);
-  } else if (index == 7) {
-    // ##
-    //  ##
-    blocks[0] = std::make_pair(grid_center - 1, 0);
-    blocks[1] = std::make_pair(grid_center, 0);
-    blocks[2] = std::make_pair(grid_center, 1);
-    blocks[3] = std::make_pair(grid_center + 1, 1);
-  }
-  for (int i = 0; i < 4; i++) {
-    grid[blocks[i].first][blocks[i].second] = index;
-  }
-}
-
-void tetris::Tetrimino::MoveDown() {}
-
-void tetris::Tetrimino::Turn() {}
 
 void tetris::Game() {
   int width = 10, height = 20;
@@ -88,71 +28,56 @@ void tetris::Game() {
   new_field.sval = std::to_string(height);
   fields.push_back(new_field);
   while (Run(width, height) == true) {
-    fields = NewForm(fields, "New Game", scrwidth / 2, 6);
+    fields = NewForm(fields, "New Game", scrwidth / 2, 4);
     width = fields[0].ival;
     height = fields[1].ival;
-    if (width >= scrwidth) {
-      width = (scrwidth - 1);
+    if ((width * 2) + 14 >= scrwidth) {
+      width = (scrwidth - 14) / 2;
     }
-    if (height >= scrheight) {
-      height = (scrheight - 1);
+    if (height + 5 >= scrheight) {
+      height = (scrheight - 5);
     }
   }
 }
 
 bool tetris::Run(int width, int height) {
-  bool running = true;
-  int level = 1, score = 0, next_tet = 0, current_tet = 0;
-  InitWindows(width + 2, height + 2);
+  InitWindows(width, height);
   grid = std::vector<std::vector<int>>(width, std::vector<int>(height + 2, 0));
   last_grid = grid;
+  Tetrimino tetrim;
+  bool running = true, return_val = false;
   while (running == true) {
-    if (current_tet == 0) {
-      current_tet = (rand() % 7) + 1;
-      AddTet(current_tet);
+    if (tetrim.init == false) {
+      tetrim.Gen();
     }
-    DisplayData(next_tet, level, score);
+    tetrim.Display();
     DisplayGrid();
-    MoveDown();
+    tetrim.Erase();
+    if (tetrim.Move(DOWN, height + 1) == true) {
+      tetrim.Del();
+    }
     int in = getch();
     if (in == int(' ')) {
-      TermWindows();
-      return (true);
-    } else if (in == 'q') {
       running = false;
+      return_val = true;
+    } else if (in == int('q')) {
+      running = false;
+      return_val = false;
+    } else if (in == KEY_RIGHT) {
+      tetrim.Move(RIGHT, width - 1);
+    } else if (in == KEY_LEFT) {
+      tetrim.Move(LEFT, 0);
+    } else if (in == KEY_DOWN) {
+      tetrim.Move(DOWN, height + 1);
+    } else if (in == KEY_UP) {
+      tetrim.Rotate();
     }
   }
-  TermWindows();
-  return (false);
-}
-
-void tetris::DisplayData(int next, int level, int score) {
-  PrintZ(std::to_string(level), 6, level_win);
-  PrintZ(std::to_string(score), 6, score_win);
-}
-
-void tetris::InitWindows(int width, int height) {
-  int total_width = width + 10;
-  grid_win = windows.size();
-  InitializeWindow();
-  windows[grid_win].CreateWindow("TETRIS", width, height,
-                                 (scrwidth - total_width) / 2, -1, true, true);
-  next_win = windows.size();
-  InitializeWindow();
-  windows[next_win].CreateWindow("Next", 10, 8,
-                                 (scrwidth - total_width) / 2 + width,
-                                 (scrheight - height) / 2, true, true);
-  level_win = windows.size();
-  InitializeWindow();
-  windows[level_win].CreateWindow("Level", 10, 3,
-                                  (scrwidth - total_width) / 2 + width,
-                                  (scrheight - height) / 2 + 8, true, true);
-  score_win = windows.size();
-  InitializeWindow();
-  windows[score_win].CreateWindow("Score", 10, 3,
-                                  (scrwidth - total_width) / 2 + width,
-                                  (scrheight - height) / 2 + 11, true, true);
-  // Grid size = 10x22 with top two hidden;
+  tetrim.Del();
+  grid.clear();
+  last_grid.clear();
+  EraseWindows();
+  return (return_val);
 }
 
 void tetris::DisplayGrid() {
@@ -161,82 +86,55 @@ void tetris::DisplayGrid() {
       if (grid[i][j] != last_grid[i][j]) {
         last_grid[i][j] = grid[i][j];
         if (grid[i][j] == 1) {
-          SetAtt({CYAN_BACK}, grid_win);
+          SetAtt({CYAN_BACK}, win[1]);
         } else if (grid[i][j] == 2) {
-          SetAtt({BLUE_BACK}, grid_win);
+          SetAtt({BLUE_BACK}, win[1]);
         } else if (grid[i][j] == 3) {
-          SetAtt({YELLOW_BACK, DIM}, grid_win);
+          SetAtt({YELLOW_BACK, DIM}, win[1]);
         } else if (grid[i][j] == 4) {
-          SetAtt({YELLOW_BACK}, grid_win);
+          SetAtt({YELLOW_BACK}, win[1]);
         } else if (grid[i][j] == 5) {
-          SetAtt({GREEN_BACK}, grid_win);
+          SetAtt({GREEN_BACK}, win[1]);
         } else if (grid[i][j] == 6) {
-          SetAtt({MAGENTA_BACK}, grid_win);
+          SetAtt({MAGENTA_BACK}, win[1]);
         } else if (grid[i][j] == 7) {
-          SetAtt({RED_BACK}, grid_win);
+          SetAtt({RED_BACK}, win[1]);
         }
-        Print(" ", j - 1, i + 1, grid_win, false);
-        SetAtt({NORMAL}, grid_win);
+        Print("  ", j - 1, (i * 2) + 1, win[1], false);
+        SetAtt({NORMAL}, win[1]);
       }
     }
   }
-  windows[grid_win].Update();
+  windows[win[1]].Update();
 }
 
-void tetris::AddTet(int tet) {
-  int grid_center = grid.size() / 2;
-  if (tet == 1) {
-    grid[grid_center - 2][1] = tet;
-    grid[grid_center - 1][1] = tet;
-    grid[grid_center][1] = tet;
-    grid[grid_center + 1][1] = tet;
-  } else if (tet == 2) {
-    grid[grid_center - 1][0] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center + 1][0] = tet;
-    grid[grid_center + 1][1] = tet;
-  } else if (tet == 3) {
-    grid[grid_center - 1][0] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center + 1][0] = tet;
-    grid[grid_center - 1][1] = tet;
-  } else if (tet == 4) {
-    grid[grid_center - 1][0] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center][1] = tet;
-    grid[grid_center - 1][1] = tet;
-  } else if (tet == 5) {
-    grid[grid_center - 1][1] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center][1] = tet;
-    grid[grid_center + 1][0] = tet;
-  } else if (tet == 6) {
-    grid[grid_center - 1][0] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center + 1][0] = tet;
-    grid[grid_center][1] = tet;
-  } else if (tet == 7) {
-    grid[grid_center + 1][1] = tet;
-    grid[grid_center][0] = tet;
-    grid[grid_center][1] = tet;
-    grid[grid_center - 1][0] = tet;
+void tetris::InitWindows(int width, int height) {
+  int total_width = (width * 2) + 2 + 12;
+  int total_height = height + 2 + 3;
+  win.push_back(windows.size());
+  InitializeWindow();
+  windows[win.back()].CreateWindow("TETRIS", total_width, 3, -1,
+                                   (scrheight - total_height) / 2, true, true);
+  win.push_back(windows.size());
+  InitializeWindow();
+  windows[win.back()].CreateWindow(
+      "grid", (width * 2) + 2, height + 2, (scrwidth - total_width) / 2,
+      ((scrheight - total_height) / 2) + 3, true, false);
+  win.push_back(windows.size());
+  InitializeWindow();
+  windows[win.back()].CreateWindow(
+      "NEXT", 12, 12, ((scrwidth - total_width) / 2) + (width * 2) + 2,
+      ((scrheight - total_height) / 2) + 3, true, true);
+  win.push_back(windows.size());
+  InitializeWindow();
+  windows[win.back()].CreateWindow(
+      "LEVEL", 12, 3, ((scrwidth - total_width) / 2) + (width * 2) + 2,
+      ((scrheight - total_height) / 2) + 15, true, true);
+}
+
+void tetris::EraseWindows() {
+  for (int i = win.size() - 1; i >= 0; i--) {
+    TerminateWindow(win[i]);
+    win.erase(win.begin() + i);
   }
-}
-
-void tetris::MoveDown() {
-  for (int i = 0; i < grid.size(); i++) {
-    for (int j = grid[i].size() - 2; j >= 0; j--) {
-      if (grid[i][j] != 0 && grid[i][j + 1] == 0) {
-        grid[i][j + 1] = grid[i][j];
-        grid[i][j] = 0;
-      }
-    }
-  }
-}
-
-void tetris::TermWindows() {
-  TerminateWindow(score_win);
-  TerminateWindow(level_win);
-  TerminateWindow(next_win);
-  TerminateWindow(grid_win);
 }
