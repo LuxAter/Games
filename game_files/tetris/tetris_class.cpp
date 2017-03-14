@@ -4,11 +4,14 @@
 #include "tetris.hpp"
 #include "tetris_class.hpp"
 
-void tetris::Tetrimino::Gen() {
+void tetris::Tetrimino::Gen(int in_shape) {
   center_pos = std::make_pair(grid.size() / 2, 1);
   init = true;
-  shape = rand() % 7;
-  shape = 3;
+  if (in_shape == -1) {
+    shape = rand() % 7;
+  } else {
+    shape = in_shape;
+  }
   if (shape == 0) {
     blocks = {-1, 0, 0, 0, 1, 0, 2, 0};
     center_pointer = 1;

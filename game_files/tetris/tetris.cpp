@@ -27,10 +27,16 @@ void tetris::Game() {
   new_field.type = 1;
   new_field.sval = std::to_string(height);
   fields.push_back(new_field);
+  new_field.name = "Level";
+  new_field.type = 1;
+  new_field.sval = "0";
+  fields.push_back(new_field);
+  level = 1;
   while (Run(width, height) == true) {
-    fields = NewForm(fields, "New Game", scrwidth / 2, 4);
+    fields = NewForm(fields, "New Game", scrwidth / 2, 5);
     width = fields[0].ival;
     height = fields[1].ival;
+    level = fields[2].ival;
     if ((width * 2) + 14 >= scrwidth) {
       width = (scrwidth - 14) / 2;
     }
@@ -48,7 +54,6 @@ void tetris::Game() {
 
 bool tetris::Run(int width, int height) {
   score = 0;
-  level = 1;
   next_shape = -1;
   line_count = 0;
   InitWindows(width, height);

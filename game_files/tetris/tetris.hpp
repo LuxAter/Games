@@ -5,7 +5,7 @@
 namespace tetris {
   extern std::vector<std::vector<int>> grid, last_grid;
   extern std::vector<int> win;
-  extern int score, level, next_shape, line_count, level_count;
+  extern int score, level, next_shape, line_count;
   void Game();
   bool Run(int width, int height);
   void DisplayGrid();

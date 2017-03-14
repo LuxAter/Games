@@ -6,7 +6,7 @@ namespace tetris {
   class Tetrimino {
    public:
     std::pair<int, int> center_pos;
-    void Gen();
+    void Gen(int in_shape = -1);
     void Del();
     bool Move(int dir, int max);
     void Rotate(int xmax, int ymax);
