@@ -9,7 +9,7 @@ namespace tetris {
     void Gen();
     void Del();
     bool Move(int dir, int max);
-    void Rotate();
+    void Rotate(int xmax, int ymax);
     void Display();
     void Erase();
     bool init = false;

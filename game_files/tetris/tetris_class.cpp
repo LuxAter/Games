@@ -8,6 +8,7 @@ void tetris::Tetrimino::Gen() {
   center_pos = std::make_pair(grid.size() / 2, 1);
   init = true;
   shape = rand() % 7;
+  shape = 3;
   if (shape == 0) {
     blocks = {-1, 0, 0, 0, 1, 0, 2, 0};
     center_pointer = 1;
@@ -79,25 +80,56 @@ bool tetris::Tetrimino::Move(int dir, int max) {
   return (at_max);
 }
 
-void tetris::Tetrimino::Rotate() {
-  if (shape == 0 || shape == 4 || shape == 6) {
-  } else if (shape == 1 || shape == 2 || shape == 5) {
-    for (int i = 0; i < blocks.size(); i += 2) {
-      if (blocks[i] > 0 && blocks[i + 1] > 0) {
-        blocks[i] *= -1;
-      } else if (blocks[i] < 0 && blocks[i + 1] > 0) {
-        blocks[i + 1] *= -1;
-      } else if (blocks[i] < 0 && blocks[i + 1] < 0) {
-        blocks[i] *= -1;
-      } else if (blocks[i] > 0 && blocks[i + 1] < 0) {
-        blocks[i + 1] *= -1;
-      } else if (blocks[i] == 0 && blocks[i + 1] > 0){
-        
-      } else if (blocks[i] == 0 && blocks[i+1] > 0){
-      } else if (blocks[i] > 0 && blocks[i+1] == 0){
-
-      }else if(blocks[i] < 0 && blocks[i+1] == 0){
-      }
+void tetris::Tetrimino::Rotate(int xmax, int ymax) {
+  bool bad = false;
+  for (int i = 0; i < blocks.size(); i += 2) {
+    if (blocks[i] > 0 && blocks[i + 1] > 0) {
+      blocks[i] *= -1;
+    } else if (blocks[i] < 0 && blocks[i + 1] > 0) {
+      blocks[i + 1] *= -1;
+    } else if (blocks[i] < 0 && blocks[i + 1] < 0) {
+      blocks[i] *= -1;
+    } else if (blocks[i] > 0 && blocks[i + 1] < 0) {
+      blocks[i + 1] *= -1;
+    } else if (blocks[i] == 0 && blocks[i + 1] > 0) {
+      blocks[i + 1] *= -1;
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    } else if (blocks[i] == 0 && blocks[i + 1] < 0) {
+      blocks[i + 1] *= -1;
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    } else if (blocks[i] > 0 && blocks[i + 1] == 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    } else if (blocks[i] < 0 && blocks[i + 1] == 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    }
+  }
+  for (int i = 0; bad == false && i < blocks.size(); i += 2) {
+    if (center_pos.first + blocks[i] < 0 ||
+        center_pos.first + blocks[i] >= xmax ||
+        center_pos.second + blocks[i + 1] < 0 ||
+        center_pos.second + blocks[i + 1] >= ymax) {
+      bad = true;
+    }
+  }
+  for (int i = 0; bad == true && i < blocks.size(); i += 2) {
+    if (blocks[i] > 0 && blocks[i + 1] > 0) {
+      blocks[i + 1] *= -1;
+    } else if (blocks[i] < 0 && blocks[i + 1] > 0) {
+      blocks[i] *= -1;
+    } else if (blocks[i] < 0 && blocks[i + 1] < 0) {
+      blocks[i + 1] *= -1;
+    } else if (blocks[i] > 0 && blocks[i + 1] < 0) {
+      blocks[i] *= -1;
+    } else if (blocks[i] == 0 && blocks[i + 1] > 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    } else if (blocks[i] == 0 && blocks[i + 1] < 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+    } else if (blocks[i] > 0 && blocks[i + 1] == 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+      blocks[i + 1] *= -1;
+    } else if (blocks[i] < 0 && blocks[i + 1] == 0) {
+      std::iter_swap(blocks.begin() + i, blocks.begin() + i + 1);
+      blocks[i + 1] *= -1;
     }
   }
 }

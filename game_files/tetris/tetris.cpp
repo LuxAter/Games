@@ -10,9 +10,9 @@ using namespace appareo::curse::out;
 using namespace appareo::induco;
 
 namespace tetris {
-  // std::vector<Tetrimino> tetriminos;
   std::vector<std::vector<int>> grid, last_grid;
   std::vector<int> win;
+  int score = -1, level = -1, next_shape = -1, line_count = -1;
 }
 
 void tetris::Game() {
@@ -37,24 +37,45 @@ void tetris::Game() {
     if (height + 5 >= scrheight) {
       height = (scrheight - 5);
     }
+    if (width <= 5) {
+      width = 5;
+    }
+    if (height < 5) {
+      height = 5;
+    }
   }
 }
 
 bool tetris::Run(int width, int height) {
+  score = 0;
+  level = 1;
+  next_shape = -1;
+  line_count = 0;
   InitWindows(width, height);
   grid = std::vector<std::vector<int>>(width, std::vector<int>(height + 2, 0));
   last_grid = grid;
   Tetrimino tetrim;
   bool running = true, return_val = false;
+  int tic_delay = 1000, tic_count = 0;
   while (running == true) {
+    tic_count++;
     if (tetrim.init == false) {
       tetrim.Gen();
     }
     tetrim.Display();
     DisplayGrid();
+    DisplayStats();
     tetrim.Erase();
-    if (tetrim.Move(DOWN, height + 1) == true) {
-      tetrim.Del();
+    if (tic_count > (tic_delay - (level * 10))) {
+      if (tetrim.Move(DOWN, height + 1) == true) {
+        score += 5;
+        tetrim.Del();
+        CheckLine();
+        if (line_count >= (level * 10)) {
+          level++;
+        }
+      }
+      tic_count = 0;
     }
     int in = getch();
     if (in == int(' ')) {
@@ -68,7 +89,9 @@ bool tetris::Run(int width, int height) {
     } else if (in == KEY_LEFT) {
       tetrim.Move(LEFT, 0);
     } else if (in == KEY_UP) {
-      tetrim.Rotate();
+      tetrim.Rotate(grid.size(), grid[0].size());
+    } else if (in == KEY_DOWN) {
+      tic_count = tic_delay;
     }
   }
   tetrim.Del();
@@ -106,6 +129,12 @@ void tetris::DisplayGrid() {
   windows[win[1]].Update();
 }
 
+void tetris::DisplayStats() {
+  PrintZ(std::to_string(score), 5, win[0]);
+  PrintZ(std::to_string(level), 5, win[3]);
+  PrintZ(std::to_string(line_count), 5, win[4]);
+}
+
 void tetris::InitWindows(int width, int height) {
   int total_width = (width * 2) + 2 + 12;
   int total_height = height + 2 + 3;
@@ -128,6 +157,11 @@ void tetris::InitWindows(int width, int height) {
   windows[win.back()].CreateWindow(
       "LEVEL", 12, 3, ((scrwidth - total_width) / 2) + (width * 2) + 2,
       ((scrheight - total_height) / 2) + 15, true, true);
+  win.push_back(windows.size());
+  InitializeWindow();
+  windows[win.back()].CreateWindow(
+      "LINES", 12, 3, ((scrwidth - total_width) / 2) + (width * 2) + 2,
+      ((scrheight - total_height) / 2) + 18, true, true);
 }
 
 void tetris::EraseWindows() {
@@ -135,4 +169,38 @@ void tetris::EraseWindows() {
     TerminateWindow(win[i]);
     win.erase(win.begin() + i);
   }
+}
+
+void tetris::CheckLine() {
+  int count = 0;
+  for (int i = grid[0].size() - 1; i >= 0; i--) {
+    bool clear = true;
+    for (int j = 0; j < grid.size(); j++) {
+      if (grid[j][i] == 0) {
+        clear = false;
+      }
+    }
+    if (clear == true) {
+      count++;
+      for (int j = 0; j < grid.size(); j++) {
+        grid[j][i] = 0;
+      }
+      for (int j = i - 1; j >= 0; j--) {
+        for (int k = 0; k < grid.size(); k++) {
+          grid[k][j + 1] = grid[k][j];
+        }
+      }
+      i++;
+    }
+  }
+  if (count == 1) {
+    score += 40 * level;
+  } else if (count == 2) {
+    score += 100 * level;
+  } else if (count == 3) {
+    score += 300 * level;
+  } else if (count == 4) {
+    score += 1200 * level;
+  }
+  line_count += count;
 }

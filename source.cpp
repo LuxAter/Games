@@ -4,7 +4,7 @@
 int main(int argc, char const* argv[]) {
   appareo::InitializeAppareo(true);
   setlocale(LC_ALL, "");
-  halfdelay(1);
+  timeout(1);
   game::MainMenu();
   appareo::TerminateAppareo();
   return 0;
