@@ -18,7 +18,8 @@ $(NAME): $(TOP_DIR) $(OBJ_FILES)
 	$(COMPILER) $(OBJ_FILES) -o $(NAME) $(LINK)
 
 %.o: %.cpp
-	$(COMPILER) $(FLAGS) -o $(notdir $*).o $*.cpp
+	@printf "Compiling $*.cpp...\n"
+	@$(COMPILER) $(FLAGS) -o $(notdir $*).o $*.cpp
 
 .PHONY : subsystem
 subsystem:

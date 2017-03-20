@@ -25,6 +25,7 @@ void snake::Game() {
   int apples = 1;
   int snake_count = 1;
   int growth = 1;
+  int speed = 10;
   std::vector<Field> fields;
   Field newfield;
   newfield.name = "Width";
@@ -51,15 +52,20 @@ void snake::Game() {
   newfield.type = 1;
   newfield.sval = std::to_string(growth);
   fields.push_back(newfield);
-  while (Run(width, height, obsticals, apples, snake_count, growth) == true) {
+  newfield.name = "Moves per Sec";
+  newfield.type = 1;
+  newfield.sval = std::to_string(speed);
+  fields.push_back(newfield);
+  while (Run(width, height, obsticals, apples, snake_count, growth, speed) == true) {
     snakes.clear();
-    fields = NewForm(fields, "New Game", scrwidth / 2, 8);
+    fields = NewForm(fields, "New Game", scrwidth / 2, 9);
     width = fields[0].ival;
     height = fields[1].ival;
     obsticals = fields[2].ival;
     apples = fields[3].ival;
     snake_count = fields[4].ival;
     growth = fields[5].ival;
+    speed = fields[6].ival;
     if (width > scrwidth - 2) {
       width = scrwidth - 2;
     }
@@ -108,7 +114,7 @@ void snake::Game() {
 }
 
 bool snake::Run(int width, int height, int obsticals, int apples,
-                int snake_count, int growth) {
+                int snake_count, int growth, int speed) {
   snakes.clear();
   grid = Grid(std::make_pair(width, height));
   grid.GenObs(obsticals);
@@ -132,6 +138,7 @@ bool snake::Run(int width, int height, int obsticals, int apples,
     snakes.push_back(Snake(growth, GetColor(color_vec)));
   }
   bool running = true;
+  int current_tic = 0, tic_count = ( 1000 / speed);
   for (int i = 0; i < snakes.size(); i++) {
     snakes[i].Update();
     grid.DisplayScore(snakes[i].score, i, int(snakes[i].color_pattern[0]) - 48);
@@ -167,10 +174,14 @@ bool snake::Run(int width, int height, int obsticals, int apples,
     return (true);
   }
   while (running == true) {
-    for (int i = 0; i < snakes.size(); i++) {
-      snakes[i].Update();
-      grid.DisplayScore(snakes[i].score, i,
+    current_tic++;
+    if(current_tic >= tic_count){
+      for (int i = 0; i < snakes.size(); i++) {
+        snakes[i].Update();
+        grid.DisplayScore(snakes[i].score, i,
                         int(snakes[i].color_pattern[0]) - 48);
+      }
+      current_tic = 0;
     }
     grid.Display();
     for (int i = 1; i < snakes.size(); i++) {

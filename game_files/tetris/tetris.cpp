@@ -10,7 +10,7 @@ using namespace appareo::curse::out;
 using namespace appareo::induco;
 
 namespace tetris {
-  std::vector<std::vector<int>> grid, last_grid;
+  std::vector<std::vector<int> > grid, last_grid;
   std::vector<int> win;
   int score = -1, level = -1, next_shape = -1, line_count = -1;
 }
@@ -54,30 +54,37 @@ void tetris::Game() {
 
 bool tetris::Run(int width, int height) {
   score = 0;
-  next_shape = -1;
+  next_shape = rand() % 7;
   line_count = 0;
   InitWindows(width, height);
   grid = std::vector<std::vector<int>>(width, std::vector<int>(height + 2, 0));
   last_grid = grid;
   Tetrimino tetrim;
   bool running = true, return_val = false;
-  int tic_delay = 1000, tic_count = 0;
+  int tic_delay = 500, tic_count = 0, start_level = 1;
   while (running == true) {
     tic_count++;
     if (tetrim.init == false) {
-      tetrim.Gen();
+      tetrim.Gen(next_shape);
+      next_shape = rand() % 7;
     }
     tetrim.Display();
     DisplayGrid();
     DisplayStats();
     tetrim.Erase();
-    if (tic_count > (tic_delay - (level * 10))) {
+    if (tic_count > (tic_delay - (level * 5))) {
       if (tetrim.Move(DOWN, height + 1) == true) {
-        score += 5;
-        tetrim.Del();
-        CheckLine();
-        if (line_count >= (level * 10)) {
-          level++;
+        if(tetrim.center_pos.second > 2){
+          score += 5;
+          tetrim.Del();
+          CheckLine();
+          if (line_count >= (start_level * 10)) {
+            level++;
+            start_level++;
+          }
+        }
+        else {
+          running = false;
         }
       }
       tic_count = 0;
