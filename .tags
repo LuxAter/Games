@@ -18,6 +18,8 @@ FOUR_IN_A_ROW_FIAR_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/fo
 fiar	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.hpp	/^namespace fiar {$/;"	namespace	line:4
 CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
 OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
 GAME_CORE	/home/ardenrasmussen/Programing/games/Games/game_files/core.hpp	/^#define GAME_CORE$/;"	macro	line:2
 game	/home/ardenrasmussen/Programing/games/Games/game_files/core.hpp	/^namespace game {$/;"	namespace	line:3
 TIC_TAC_TOE_TTT_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.hpp	/^#define TIC_TAC_TOE_TTT_HPP$/;"	macro	line:2
@@ -33,6 +35,7 @@ Win	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/
 AI	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^std::pair<int, int> ttt::AI(int length) {$/;"	function	line:267	class:ttt	signature:(int length)
 CanWin	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^std::pair<int, int> ttt::CanWin(int player, int length) {$/;"	function	line:289	class:ttt	signature:(int player, int length)
 CatsGame	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^bool ttt::CatsGame() {$/;"	function	line:307	class:ttt	signature:()
+MainMenu	/home/ardenrasmussen/Programing/games/Games/game_files/core.cpp	/^void game::MainMenu() {$/;"	function	line:11	class:game	signature:()
 MAZE_MAZE_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.hpp	/^#define MAZE_MAZE_HPP$/;"	macro	line:2
 maze	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.hpp	/^namespace maze {$/;"	namespace	line:5
 Init	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::Init(int sizex, int sizey, bool winc) {$/;"	function	line:11	class:maze::Grid	signature:(int sizex, int sizey, bool winc)
@@ -128,6 +131,8 @@ Run	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^boo
 Alive	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^bool snake::Alive() {$/;"	function	line:223	class:snake	signature:()
 SetColor	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^void snake::SetColor() {$/;"	function	line:233	class:snake	signature:()
 GetColor	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^std::string snake::GetColor(std::vector<int> color_vec) {$/;"	function	line:244	class:snake	signature:(std::vector<int> color_vec)
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
 MINESW_MINESW	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.hpp	/^#define MINESW_MINESW$/;"	macro	line:2
 minesw	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.hpp	/^namespace minesw {$/;"	namespace	line:5
 minesw	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^namespace minesw {$/;"	namespace	line:13	file:
@@ -207,12 +212,13 @@ OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/Makefile	/^OBJ_FILES := $(
 LINK	/home/ardenrasmussen/Programing/games/Games/Makefile	/^LINK = -lappareo -lncurses -lpessum$/;"	macro	line:10
 NAME	/home/ardenrasmussen/Programing/games/Games/Makefile	/^NAME = game$/;"	macro	line:11
 main	/home/ardenrasmussen/Programing/games/Games/source.cpp	/^int main(int argc, char const* argv[]) {$/;"	function	line:4	signature:(int argc, char const* argv[])
-MainMenu	/home/ardenrasmussen/Programing/games/Games/game_files/core.cpp	/^void game::MainMenu() {$/;"	function	line:11	class:game	signature:()
-CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
-OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
 PACMAN_PACMAN_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.hpp	/^#define PACMAN_PACMAN_HPP$/;"	macro	line:2
 pacman	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.hpp	/^namespace pacman {$/;"	namespace	line:4
 pacman	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^namespace pacman {$/;"	namespace	line:10	file:
-grid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  std::vector<std::vector<int>> grid;$/;"	member	line:11	namespace:pacman	file:
-Game	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::Game() {}$/;"	function	line:14	class:pacman	signature:()
-LoadGrid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::LoadGrid() {$/;"	function	line:16	class:pacman	signature:()
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:11	namespace:pacman	file:
+last_grid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:11	namespace:pacman	file:
+win	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  int win, score_win;$/;"	member	line:12	namespace:pacman	file:
+score_win	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  int win, score_win;$/;"	member	line:12	namespace:pacman	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::Game() {$/;"	function	line:15	class:pacman	signature:()
+DisplayGrid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::DisplayGrid() {$/;"	function	line:38	class:pacman	signature:()
+LoadGrid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::LoadGrid() {$/;"	function	line:49	class:pacman	signature:()

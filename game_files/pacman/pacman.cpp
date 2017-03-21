@@ -8,13 +8,47 @@ using namespace appareo::curse::out;
 using namespace appareo::induco;
 
 namespace pacman {
-  std::vector<std::vector<int>> grid;
+  std::vector<std::vector<int>> grid, last_grid;
+  int win, score_win;
 }
 
-void pacman::Game() {}
+void pacman::Game() {
+  bool running = true;
+  InitializeWindow();
+  win = windows.size() - 1;
+  windows[win].CreateWindow("grid", 30, 32, -1, (scrheight - 35) / 2 + 3, true,
+                            false);
+  InitializeWindow();
+  score_win = windows.size() - 1;
+  windows[score_win].CreateWindow("PACMAN", 30, 3, -1, (scrheight - 35) / 2,
+                                  true, true);
+
+  LoadGrid();
+  while (running == true) {
+    DisplayGrid();
+    int in = getch();
+    if (in == int('q')) {
+      running = false;
+    }
+  }
+  TerminateWindow(score_win);
+  TerminateWindow(win);
+}
+
+void pacman::DisplayGrid() {
+  for (int i = 0; i < 28; i++) {
+    for (int j = 0; j < 30; j++) {
+      if (last_grid[i][j] != grid[i][j]) {
+        last_grid[i][j] = grid[i][j];
+        // Print here!
+      }
+    }
+  }
+}
 
 void pacman::LoadGrid() {
   grid.clear();
+  last_grid = std::vector<std::vector<int>>(28, std::vector<int>(30, 0));
   std::ifstream load_grid("pacman_grid.txt");
   if (load_grid.is_open()) {
     std::string in;
