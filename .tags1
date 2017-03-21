@@ -4,7 +4,3 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-pacman	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^namespace pacman {$/;"	namespace	line:10	file:
-grid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  std::vector<std::vector<int>> grid;$/;"	member	line:11	namespace:pacman	file:
-Game	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::Game() {}$/;"	function	line:14	class:pacman	signature:()
-LoadGrid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::LoadGrid() {$/;"	function	line:16	class:pacman	signature:()
