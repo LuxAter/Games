@@ -106,6 +106,7 @@ bool ttt::Run(int width, int height, int win_length, bool ai) {
       player = 4;
       running = false;
     } else if (in == int(' ')) {
+      TerminateWindow(pl_win);
       TerminateWindow(win);
       return (true);
     } else if (in == KEY_UP && pos.second != 0) {

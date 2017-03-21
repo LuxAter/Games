@@ -16,6 +16,7 @@ namespace maze {
 void maze::Game() {
   int width = scrwidth - 3;
   int height = scrheight - 5;
+  int speed = 10;
   if (width % 2 == 0) {
     width++;
   }
@@ -32,27 +33,32 @@ void maze::Game() {
   newfield.type = 1;
   newfield.sval = std::to_string(height);
   fields.push_back(newfield);
+  newfield.name = "Speed";
+  newfield.type = 1;
+  newfield.sval = std::to_string(speed);
+  fields.push_back(newfield);
   newfield.name = "Analize";
   newfield.type = 3;
   newfield.bval = false;
   fields.push_back(newfield);
   bool term = false;
-  while (Run(width, height) == true) {
+  while (Run(width, height, speed) == true) {
     grid.Delete();
     fields = NewForm(fields, "New Game", scrwidth / 2, 8);
     width = fields[0].ival;
     height = fields[1].ival;
+    speed = fields[2].ival;
     if (width % 2 == 0) {
       width++;
     }
     if (height % 2 == 0) {
       height++;
     }
-    if (fields[2].bval == true) {
+    if (fields[3].bval == true) {
       break;
     }
   }
-  if (fields[2].bval == true) {
+  if (fields[3].bval == true) {
     term = true;
     fields.clear();
     newfield.name = "Count";
@@ -141,11 +147,12 @@ void maze::Game() {
   }
 }
 
-bool maze::Run(int width, int height) {
+bool maze::Run(int width, int height, int speed) {
   int currentx = 1, currenty = 1;
   grid.Init(width, height);
   bool running = true;
   int in = ERR, last = ERR;
+  int tic_counter = 0, tic_delay = (1000 / speed);
   while (running == true) {
     grid.SetDisp(currentx, currenty);
     grid.Show();
@@ -155,25 +162,34 @@ bool maze::Run(int width, int height) {
     if (in == ERR) {
       in = last;
     }
+    tic_counter++;
     last = in;
-    if (in == KEY_UP && grid.CheckPos(currentx, currenty - 1)) {
+    if (tic_counter >= tic_delay && in == KEY_UP &&
+        grid.CheckPos(currentx, currenty - 1)) {
       currenty--;
       grid.score++;
+      tic_counter = 0;
     }
 
-    if (in == KEY_DOWN && grid.CheckPos(currentx, currenty + 1)) {
+    if (tic_counter >= tic_delay && in == KEY_DOWN &&
+        grid.CheckPos(currentx, currenty + 1)) {
       currenty++;
       grid.score++;
+      tic_counter = 0;
     }
 
-    if (in == KEY_LEFT && grid.CheckPos(currentx - 1, currenty)) {
+    if (tic_counter >= tic_delay && in == KEY_LEFT &&
+        grid.CheckPos(currentx - 1, currenty)) {
       currentx--;
       grid.score++;
+      tic_counter = 0;
     }
 
-    if (in == KEY_RIGHT && grid.CheckPos(currentx + 1, currenty)) {
+    if (tic_counter >= tic_delay && in == KEY_RIGHT &&
+        grid.CheckPos(currentx + 1, currenty)) {
       currentx++;
       grid.score++;
+      tic_counter = 0;
     }
     if (in == int('q')) {
       return (false);
@@ -182,7 +198,7 @@ bool maze::Run(int width, int height) {
       return (true);
     }
     if (in == int('s')) {
-      AutoRun(false);
+      AutoRun(false, speed);
       Score();
       return (true);
     }
@@ -194,12 +210,12 @@ bool maze::Run(int width, int height) {
   return (true);
 }
 
-void maze::AutoRun(bool fast) {
+void maze::AutoRun(bool fast, int speed) {
   std::vector<std::vector<int>> aimaze = grid.GetIntVec();
   std::pair<int, int> pos(1, 1);
   std::pair<int, int> end(grid.width - 2, grid.height - 2);
-  int delaytick = CLOCKS_PER_SEC / 400;
-  clock_t currenttime = clock();
+  int delaytick = (1000 / speed);
+  int currenttime = 0;
   bool solved = false;
   int dir = 2, index = 0;
   while (solved == false) {
@@ -307,9 +323,17 @@ void maze::AutoRun(bool fast) {
       grid.Show();
       grid.ShowPos(pos.first, pos.second);
       grid.SetPos(pos.first, pos.second);
-      while (clock() < currenttime + delaytick) {
+      while (currenttime < delaytick) {
+        int in = getch();
+        if (in == int(' ')) {
+          delaytick = 1;
+        }
+        if (in == int('q')) {
+          solved = true;
+        }
+        currenttime++;
       }
-      currenttime = clock();
+      currenttime = 0;
     }
     if (pos.first == end.first && pos.second == end.second) {
       solved = true;

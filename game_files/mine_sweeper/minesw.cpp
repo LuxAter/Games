@@ -67,10 +67,15 @@ bool minesw::Run(int width, int height, int mines) {
   bool first = true;
   grid.Show(currentx, currenty);
   int in = ERR;
+  int tic_count = 0;
   while (running == true) {
     grid.Show(currentx, currenty);
     in = getch();
-    grid.score++;
+    tic_count++;
+    if (tic_count >= 500) {
+      grid.score++;
+      tic_count = 0;
+    }
     if (in == KEY_UP && currenty > 0) {
       currenty--;
     }

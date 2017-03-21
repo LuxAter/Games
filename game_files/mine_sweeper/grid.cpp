@@ -96,8 +96,7 @@ void minesw::Grid::Show(int x, int y) {
     }
   }
   windows[win].Update();
-  windows[countwin].Clear();
-  PrintZ(std::to_string(minecount - flagcount), 4, countwin);
+  PrintZ(std::to_string(minecount - flagcount) + "     ", 4, countwin);
   PrintZ(std::to_string(score), 6, countwin);
 }
 
@@ -115,7 +114,7 @@ void minesw::Grid::GenMines(int xpos, int ypos) {
     int x = rand() % width;
     int y = rand() % height;
     if (displaygrid[x][y] == -1 && rawgrid[x][y] == false &&
-        ((x > xpos + 1 || x < xpos - 1) || (y > ypos + 1 || y < ypos - 1))) {
+        (x > xpos + 1 || x < xpos - 1 || y > ypos + 1 || y < ypos - 1)) {
       rawgrid[x][y] = true;
       count++;
     }

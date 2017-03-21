@@ -5,8 +5,8 @@
 namespace maze {
   extern Grid grid;
   void Game();
-  bool Run(int width, int height);
-  void AutoRun(bool fast);
+  bool Run(int width, int height, int speed);
+  void AutoRun(bool fast, int speed = -1);
   void Score();
 }
 #endif

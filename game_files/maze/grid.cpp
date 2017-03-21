@@ -90,7 +90,6 @@ void maze::Grid::Show() {
     lastdispx = dispx;
     lastdispy = dispy;
   }
-  windows[countwin].Clear();
   PrintZ(std::to_string(score), 5, countwin);
 }
 
