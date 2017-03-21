@@ -1,3 +1,7 @@
+ifndef VERBOSE
+.SILENT:
+endif
+
 export COMPILER = clang++
 export FLAGS = -MMD -std=c++11 -w -c
 CPP_FILES = $(wildcard *.cpp)

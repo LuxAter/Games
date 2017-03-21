@@ -10,7 +10,7 @@ using namespace appareo::curse::out;
 using namespace appareo::induco;
 
 namespace tetris {
-  std::vector<std::vector<int> > grid, last_grid;
+  std::vector<std::vector<int>> grid, last_grid;
   std::vector<int> win;
   int score = -1, level = -1, next_shape = -1, line_count = -1;
 }
@@ -67,6 +67,7 @@ bool tetris::Run(int width, int height) {
     if (tetrim.init == false) {
       tetrim.Gen(next_shape);
       next_shape = rand() % 7;
+      DisplayNext(next_shape);
     }
     tetrim.Display();
     DisplayGrid();
@@ -74,7 +75,7 @@ bool tetris::Run(int width, int height) {
     tetrim.Erase();
     if (tic_count > (tic_delay - (level * 5))) {
       if (tetrim.Move(DOWN, height + 1) == true) {
-        if(tetrim.center_pos.second > 2){
+        if (tetrim.center_pos.second > 2) {
           score += 5;
           tetrim.Del();
           CheckLine();
@@ -82,8 +83,7 @@ bool tetris::Run(int width, int height) {
             level++;
             start_level++;
           }
-        }
-        else {
+        } else {
           running = false;
         }
       }
@@ -123,9 +123,9 @@ void tetris::DisplayGrid() {
         } else if (grid[i][j] == 2) {
           SetAtt({BLUE_BACK}, win[1]);
         } else if (grid[i][j] == 3) {
-          SetAtt({YELLOW_BACK, DIM}, win[1]);
-        } else if (grid[i][j] == 4) {
           SetAtt({YELLOW_BACK}, win[1]);
+        } else if (grid[i][j] == 4) {
+          SetAtt({WHITE_BACK}, win[1]);
         } else if (grid[i][j] == 5) {
           SetAtt({GREEN_BACK}, win[1]);
         } else if (grid[i][j] == 6) {
@@ -145,6 +145,34 @@ void tetris::DisplayStats() {
   PrintZ(std::to_string(score), 5, win[0]);
   PrintZ(std::to_string(level), 5, win[3]);
   PrintZ(std::to_string(line_count), 5, win[4]);
+}
+
+void tetris::DisplayNext(int shape) {
+  Tetrimino next_tet;
+  next_tet.Gen(shape);
+  shape++;
+  windows[win[2]].Clear();
+  if (shape == 1) {
+    SetAtt({CYAN_BACK}, win[2]);
+  } else if (shape == 2) {
+    SetAtt({BLUE_BACK}, win[2]);
+  } else if (shape == 3) {
+    SetAtt({YELLOW_BACK}, win[2]);
+  } else if (shape == 4) {
+    SetAtt({WHITE_BACK}, win[2]);
+  } else if (shape == 5) {
+    SetAtt({GREEN_BACK}, win[2]);
+  } else if (shape == 6) {
+    SetAtt({MAGENTA_BACK}, win[2]);
+  } else if (shape == 7) {
+    SetAtt({RED_BACK}, win[2]);
+  }
+  for (int i = 0; i < next_tet.blocks.size(); i += 2) {
+    Print("  ", (5 + next_tet.blocks[i + 1]) + 1,
+          (5 + (next_tet.blocks[i]) * 2), win[2], false);
+  }
+  SetAtt({NORMAL}, win[2]);
+  windows[win[2]].Update();
 }
 
 void tetris::InitWindows(int width, int height) {

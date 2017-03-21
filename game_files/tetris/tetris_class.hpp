@@ -5,7 +5,6 @@ namespace tetris {
   enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };
   class Tetrimino {
    public:
-    std::pair<int, int> center_pos;
     void Gen(int in_shape = -1);
     void Del();
     bool Move(int dir, int max);
@@ -13,6 +12,7 @@ namespace tetris {
     void Display();
     void Erase();
     bool init = false;
+    std::pair<int, int> center_pos;
     std::vector<int> blocks;
 
    private:

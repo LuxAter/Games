@@ -10,6 +10,7 @@ namespace tetris {
   bool Run(int width, int height);
   void DisplayGrid();
   void DisplayStats();
+  void DisplayNext(int shape);
   void InitWindows(int width, int height);
   void EraseWindows();
   void CheckLine();
