@@ -15,6 +15,8 @@ subsystem:
 	@cd maze && $(MAKE)
 	@printf "\n=====>Mine Sweeper<=====\n\n"
 	@cd mine_sweeper && $(MAKE)
+	@printf "\n=====>Pacman<=====\n\n"
+	@cd pacman && $(MAKE)
 	@printf "\n=====>Snake<=====\n\n"
 	@cd snake && $(MAKE)
 	@printf "\n=====>Tetris<=====\n\n"

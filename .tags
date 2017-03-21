@@ -1,0 +1,218 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+fiar	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^namespace fiar {$/;"	namespace	line:10	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^  std::vector<std::vector<int>> grid;$/;"	member	line:11	namespace:fiar	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^void fiar::Game() {$/;"	function	line:14	class:fiar	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^bool fiar::Run(int width, int height, int win_length, bool ai) {$/;"	function	line:50	class:fiar	signature:(int width, int height, int win_length, bool ai)
+DrawGrid	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^void fiar::DrawGrid(int width, int height, int win, int pos) {$/;"	function	line:174	class:fiar	signature:(int width, int height, int win, int pos)
+Pause	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^void fiar::Pause(int tics) {$/;"	function	line:194	class:fiar	signature:(int tics)
+Win	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^bool fiar::Win(int player, int length, bool real) {$/;"	function	line:200	class:fiar	signature:(int player, int length, bool real)
+CatsGame	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^bool fiar::CatsGame() {$/;"	function	line:268	class:fiar	signature:()
+AI	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^int fiar::AI(int length) {$/;"	function	line:280	class:fiar	signature:(int length)
+CanWin	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.cpp	/^int fiar::CanWin(int player, int length) {$/;"	function	line:302	class:fiar	signature:(int player, int length)
+FOUR_IN_A_ROW_FIAR_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.hpp	/^#define FOUR_IN_A_ROW_FIAR_HPP$/;"	macro	line:2
+fiar	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/fiar.hpp	/^namespace fiar {$/;"	namespace	line:4
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/four_in_a_row/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+GAME_CORE	/home/ardenrasmussen/Programing/games/Games/game_files/core.hpp	/^#define GAME_CORE$/;"	macro	line:2
+game	/home/ardenrasmussen/Programing/games/Games/game_files/core.hpp	/^namespace game {$/;"	namespace	line:3
+TIC_TAC_TOE_TTT_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.hpp	/^#define TIC_TAC_TOE_TTT_HPP$/;"	macro	line:2
+ttt	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.hpp	/^namespace ttt {$/;"	namespace	line:4
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+ttt	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^namespace ttt {$/;"	namespace	line:10	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^  std::vector<std::vector<int>> grid;$/;"	member	line:11	namespace:ttt	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^void ttt::Game() {$/;"	function	line:14	class:ttt	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^bool ttt::Run(int width, int height, int win_length, bool ai) {$/;"	function	line:50	class:ttt	signature:(int width, int height, int win_length, bool ai)
+DrawGrid	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^void ttt::DrawGrid(int width, int height, int win, std::pair<int, int> pos) {$/;"	function	line:166	class:ttt	signature:(int width, int height, int win, std::pair<int, int> pos)
+Win	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^bool ttt::Win(int player, int length, bool real) {$/;"	function	line:199	class:ttt	signature:(int player, int length, bool real)
+AI	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^std::pair<int, int> ttt::AI(int length) {$/;"	function	line:267	class:ttt	signature:(int length)
+CanWin	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^std::pair<int, int> ttt::CanWin(int player, int length) {$/;"	function	line:289	class:ttt	signature:(int player, int length)
+CatsGame	/home/ardenrasmussen/Programing/games/Games/game_files/tic_tac_toe/ttt.cpp	/^bool ttt::CatsGame() {$/;"	function	line:307	class:ttt	signature:()
+MAZE_MAZE_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.hpp	/^#define MAZE_MAZE_HPP$/;"	macro	line:2
+maze	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.hpp	/^namespace maze {$/;"	namespace	line:5
+Init	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::Init(int sizex, int sizey, bool winc) {$/;"	function	line:11	class:maze::Grid	signature:(int sizex, int sizey, bool winc)
+CheckPos	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^bool maze::Grid::CheckPos(int x, int y) {$/;"	function	line:47	class:maze::Grid	signature:(int x, int y)
+Show	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::Show() {$/;"	function	line:56	class:maze::Grid	signature:()
+GenGrid	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::GenGrid() {$/;"	function	line:96	class:maze::Grid	signature:()
+Delete	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::Delete() {$/;"	function	line:151	class:maze::Grid	signature:()
+ShowPos	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::ShowPos(int x, int y) {$/;"	function	line:167	class:maze::Grid	signature:(int x, int y)
+SetDisp	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::SetDisp(int x, int y) {$/;"	function	line:173	class:maze::Grid	signature:(int x, int y)
+GetIntVec	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^std::vector<std::vector<int>> maze::Grid::GetIntVec() {$/;"	function	line:200	class:maze::Grid	signature:()
+ErasePos	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::ErasePos(int x, int y) {$/;"	function	line:210	class:maze::Grid	signature:(int x, int y)
+SetPos	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.cpp	/^void maze::Grid::SetPos(int x, int y) { grid[x][y] = 3; }$/;"	function	line:215	class:maze::Grid	signature:(int x, int y)
+MAZE_GRID	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^#define MAZE_GRID$/;"	macro	line:2
+maze	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^namespace maze {$/;"	namespace	line:4
+Grid	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^  class Grid {$/;"	class	line:5	namespace:maze
+width	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int width, height, score, win;$/;"	member	line:15	class:maze::Grid
+height	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int width, height, score, win;$/;"	member	line:15	class:maze::Grid
+score	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int width, height, score, win;$/;"	member	line:15	class:maze::Grid
+win	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int width, height, score, win;$/;"	member	line:15	class:maze::Grid
+wincheck	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    bool wincheck = true;$/;"	member	line:19	class:maze::Grid
+countwin	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;$/;"	member	line:20	class:maze::Grid
+dispx	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;$/;"	member	line:20	class:maze::Grid
+dispy	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;$/;"	member	line:20	class:maze::Grid
+lastdispx	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;$/;"	member	line:20	class:maze::Grid
+lastdispy	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;$/;"	member	line:20	class:maze::Grid
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    std::vector<std::vector<int>> grid;$/;"	member	line:21	class:maze::Grid
+lastdispgrid	/home/ardenrasmussen/Programing/games/Games/game_files/maze/grid.hpp	/^    std::vector<std::vector<int>> lastdispgrid;$/;"	member	line:22	class:maze::Grid
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/maze/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/maze/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+maze	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^namespace maze {$/;"	namespace	line:12	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^  Grid grid;$/;"	member	line:13	namespace:maze	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^void maze::Game() {$/;"	function	line:16	class:maze	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^bool maze::Run(int width, int height, int speed) {$/;"	function	line:150	class:maze	signature:(int width, int height, int speed)
+AutoRun	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^void maze::AutoRun(bool fast, int speed) {$/;"	function	line:213	class:maze	signature:(bool fast, int speed)
+Score	/home/ardenrasmussen/Programing/games/Games/game_files/maze/maze.cpp	/^void maze::Score() {$/;"	function	line:344	class:maze	signature:()
+SNAKE_SNAKE_CLASS_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^#define SNAKE_SNAKE_CLASS_HPP$/;"	macro	line:2
+snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^namespace snake {$/;"	namespace	line:5
+Snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^  class Snake {$/;"	class	line:7	namespace:snake
+alive	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    bool alive = true;$/;"	member	line:15	class:snake::Snake
+score	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    int score = 0;$/;"	member	line:16	class:snake::Snake
+color_pattern	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    std::string color_pattern = "0";$/;"	member	line:17	class:snake::Snake
+color_length	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    int color_length = 1;$/;"	member	line:18	class:snake::Snake
+grow_rate	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    int grow_rate, grew = 0, color_index = 0;$/;"	member	line:22	class:snake::Snake
+grew	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    int grow_rate, grew = 0, color_index = 0;$/;"	member	line:22	class:snake::Snake
+color_index	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    int grow_rate, grew = 0, color_index = 0;$/;"	member	line:22	class:snake::Snake
+goal_pos	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    std::pair<int, int> goal_pos, head, dir;$/;"	member	line:23	class:snake::Snake
+head	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    std::pair<int, int> goal_pos, head, dir;$/;"	member	line:23	class:snake::Snake
+dir	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    std::pair<int, int> goal_pos, head, dir;$/;"	member	line:23	class:snake::Snake
+body	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.hpp	/^    std::vector<std::vector<int>> body;$/;"	member	line:24	class:snake::Snake
+Grid	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^snake::Grid::Grid(std::pair<int, int> size) {$/;"	function	line:11	class:snake::Grid	signature:(std::pair<int, int> size)
+GenObs	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::GenObs(int count) {$/;"	function	line:27	class:snake::Grid	signature:(int count)
+SetAppleCount	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::SetAppleCount(int count) { apple_count = count; }$/;"	function	line:34	class:snake::Grid	signature:(int count)
+SetScoreCount	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::SetScoreCount(int count) { score_count = count; }$/;"	function	line:36	class:snake::Grid	signature:(int count)
+GenApple	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::GenApple() {$/;"	function	line:38	class:snake::Grid	signature:()
+Display	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::Display() {$/;"	function	line:47	class:snake::Grid	signature:()
+DisplayScore	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::DisplayScore(int score, int index, int color) {$/;"	function	line:79	class:snake::Grid	signature:(int score, int index, int color)
+GetPos	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^int snake::Grid::GetPos(std::pair<int, int> pos) {$/;"	function	line:95	class:snake::Grid	signature:(std::pair<int, int> pos)
+SetPos	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::SetPos(std::pair<int, int> pos, int val) {$/;"	function	line:105	class:snake::Grid	signature:(std::pair<int, int> pos, int val)
+FindFree	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^std::pair<int, int> snake::Grid::FindFree() {$/;"	function	line:112	class:snake::Grid	signature:()
+Eat	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::Eat(std::pair<int, int> pos) {$/;"	function	line:125	class:snake::Grid	signature:(std::pair<int, int> pos)
+Delete	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^void snake::Grid::Delete() {$/;"	function	line:136	class:snake::Grid	signature:()
+~Grid	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.cpp	/^snake::Grid::~Grid() {$/;"	function	line:144	class:snake::Grid	signature:()
+sortfunction	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^bool snake::sortfunction(const std::pair<int, int>& i,$/;"	function	line:8	class:snake	signature:(const std::pair<int, int>& i, const std::pair<int, int>& j)
+Snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^snake::Snake::Snake(int growth, std::string color_set) {$/;"	function	line:13	class:snake::Snake	signature:(int growth, std::string color_set)
+SetDir	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^void snake::Snake::SetDir(std::pair<int, int> new_dir) { dir = new_dir; }$/;"	function	line:20	class:snake::Snake	signature:(std::pair<int, int> new_dir)
+Update	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^void snake::Snake::Update() {$/;"	function	line:22	class:snake::Snake	signature:()
+Kill	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^void snake::Snake::Kill() {$/;"	function	line:69	class:snake::Snake	signature:()
+AI	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^void snake::Snake::AI() {$/;"	function	line:77	class:snake::Snake	signature:()
+~Snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^snake::Snake::~Snake() { body.clear(); }$/;"	function	line:127	class:snake::Snake	signature:()
+FindGoal	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake_class.cpp	/^void snake::Snake::FindGoal() {$/;"	function	line:129	class:snake::Snake	signature:()
+SNAKE_SNAKE_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.hpp	/^#define SNAKE_SNAKE_HPP$/;"	macro	line:2
+snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.hpp	/^namespace snake {$/;"	namespace	line:6
+SNAKE_GRID_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^#define SNAKE_GRID_HPP$/;"	macro	line:2
+snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^namespace snake {$/;"	namespace	line:5
+Grid	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^  class Grid {$/;"	class	line:6	namespace:snake
+grid_size	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    std::pair<int, int> grid_size;$/;"	member	line:21	class:snake::Grid
+apple_pos	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    std::vector<std::pair<int, int>> apple_pos;$/;"	member	line:22	class:snake::Grid
+current_apples	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    int current_apples = 0;$/;"	member	line:23	class:snake::Grid
+win	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    int win = 0, score_win = 0, score_count = 1;$/;"	member	line:26	class:snake::Grid
+score_win	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    int win = 0, score_win = 0, score_count = 1;$/;"	member	line:26	class:snake::Grid
+score_count	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    int win = 0, score_win = 0, score_count = 1;$/;"	member	line:26	class:snake::Grid
+apple_count	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    int apple_count = 0;$/;"	member	line:27	class:snake::Grid
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:28	class:snake::Grid
+last_grid	/home/ardenrasmussen/Programing/games/Games/game_files/snake/grid.hpp	/^    std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:28	class:snake::Grid
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/snake/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/snake/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+snake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^namespace snake {$/;"	namespace	line:11	file:
+color	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^  std::string color = "1";$/;"	member	line:13	namespace:snake	file:
+snakes	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^  std::vector<Snake> snakes;$/;"	member	line:14	namespace:snake	file:
+SortSnake	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^bool snake::SortSnake(const snake::Snake& a, const snake::Snake& b) {$/;"	function	line:17	class:snake	signature:(const snake::Snake& a, const snake::Snake& b)
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^void snake::Game() {$/;"	function	line:21	class:snake	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^bool snake::Run(int width, int height, int obsticals, int apples,$/;"	function	line:116	class:snake	signature:(int width, int height, int obsticals, int apples, int snake_count, int growth, int speed)
+Alive	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^bool snake::Alive() {$/;"	function	line:223	class:snake	signature:()
+SetColor	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^void snake::SetColor() {$/;"	function	line:233	class:snake	signature:()
+GetColor	/home/ardenrasmussen/Programing/games/Games/game_files/snake/snake.cpp	/^std::string snake::GetColor(std::vector<int> color_vec) {$/;"	function	line:244	class:snake	signature:(std::vector<int> color_vec)
+MINESW_MINESW	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.hpp	/^#define MINESW_MINESW$/;"	macro	line:2
+minesw	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.hpp	/^namespace minesw {$/;"	namespace	line:5
+minesw	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^namespace minesw {$/;"	namespace	line:13	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^  Grid grid;$/;"	member	line:14	namespace:minesw	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^void minesw::Game() {$/;"	function	line:17	class:minesw	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^bool minesw::Run(int width, int height, int mines) {$/;"	function	line:63	class:minesw	signature:(int width, int height, int mines)
+Score	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/minesw.cpp	/^void minesw::Score() {$/;"	function	line:122	class:minesw	signature:()
+Init	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::Init(int sizex, int sizey, int mine) {$/;"	function	line:11	class:minesw::Grid	signature:(int sizex, int sizey, int mine)
+CheckPos	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^bool minesw::Grid::CheckPos(int x, int y) {$/;"	function	line:29	class:minesw::Grid	signature:(int x, int y)
+ClearSpace	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::ClearSpace(int x, int y) {$/;"	function	line:38	class:minesw::Grid	signature:(int x, int y)
+Show	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::Show(int x, int y) {$/;"	function	line:55	class:minesw::Grid	signature:(int x, int y)
+GenGrid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::GenGrid() {$/;"	function	line:103	class:minesw::Grid	signature:()
+GenMines	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::GenMines(int xpos, int ypos) {$/;"	function	line:111	class:minesw::Grid	signature:(int xpos, int ypos)
+Delete	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::Delete() {$/;"	function	line:124	class:minesw::Grid	signature:()
+GetCount	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^int minesw::Grid::GetCount(int x, int y) {$/;"	function	line:131	class:minesw::Grid	signature:(int x, int y)
+Flag	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^void minesw::Grid::Flag(int x, int y) {$/;"	function	line:143	class:minesw::Grid	signature:(int x, int y)
+Compleated	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.cpp	/^bool minesw::Grid::Compleated() {$/;"	function	line:153	class:minesw::Grid	signature:()
+MINESW_GRID	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^#define MINESW_GRID$/;"	macro	line:2
+minesw	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^namespace minesw {$/;"	namespace	line:4
+Grid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^  class Grid {$/;"	class	line:5	namespace:minesw
+width	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int width, height, minecount, score, flagcount = 0;$/;"	member	line:15	class:minesw::Grid
+height	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int width, height, minecount, score, flagcount = 0;$/;"	member	line:15	class:minesw::Grid
+minecount	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int width, height, minecount, score, flagcount = 0;$/;"	member	line:15	class:minesw::Grid
+score	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int width, height, minecount, score, flagcount = 0;$/;"	member	line:15	class:minesw::Grid
+flagcount	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int width, height, minecount, score, flagcount = 0;$/;"	member	line:15	class:minesw::Grid
+win	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int win, countwin;$/;"	member	line:18	class:minesw::Grid
+countwin	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    int win, countwin;$/;"	member	line:18	class:minesw::Grid
+rawgrid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    std::vector<std::vector<bool>> rawgrid;$/;"	member	line:19	class:minesw::Grid
+displaygrid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    std::vector<std::vector<int>> displaygrid, lastgrid;$/;"	member	line:20	class:minesw::Grid
+lastgrid	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/grid.hpp	/^    std::vector<std::vector<int>> displaygrid, lastgrid;$/;"	member	line:20	class:minesw::Grid
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/mine_sweeper/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+Gen	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^void tetris::Tetrimino::Gen(int in_shape) {$/;"	function	line:7	class:tetris::Tetrimino	signature:(int in_shape)
+Del	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^void tetris::Tetrimino::Del() {$/;"	function	line:42	class:tetris::Tetrimino	signature:()
+Move	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^bool tetris::Tetrimino::Move(int dir, int max) {$/;"	function	line:50	class:tetris::Tetrimino	signature:(int dir, int max)
+Rotate	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^void tetris::Tetrimino::Rotate(int xmax, int ymax) {$/;"	function	line:86	class:tetris::Tetrimino	signature:(int xmax, int ymax)
+Display	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^void tetris::Tetrimino::Display() {$/;"	function	line:140	class:tetris::Tetrimino	signature:()
+Erase	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.cpp	/^void tetris::Tetrimino::Erase() {$/;"	function	line:146	class:tetris::Tetrimino	signature:()
+tetris	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^namespace tetris {$/;"	namespace	line:12	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:13	namespace:tetris	file:
+last_grid	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  std::vector<std::vector<int>> grid, last_grid;$/;"	member	line:13	namespace:tetris	file:
+win	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  std::vector<int> win;$/;"	member	line:14	namespace:tetris	file:
+score	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  int score = -1, level = -1, next_shape = -1, line_count = -1;$/;"	member	line:15	namespace:tetris	file:
+level	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  int score = -1, level = -1, next_shape = -1, line_count = -1;$/;"	member	line:15	namespace:tetris	file:
+next_shape	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  int score = -1, level = -1, next_shape = -1, line_count = -1;$/;"	member	line:15	namespace:tetris	file:
+line_count	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^  int score = -1, level = -1, next_shape = -1, line_count = -1;$/;"	member	line:15	namespace:tetris	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::Game() {$/;"	function	line:18	class:tetris	signature:()
+Run	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^bool tetris::Run(int width, int height) {$/;"	function	line:55	class:tetris	signature:(int width, int height)
+DisplayGrid	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::DisplayGrid() {$/;"	function	line:116	class:tetris	signature:()
+DisplayStats	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::DisplayStats() {$/;"	function	line:144	class:tetris	signature:()
+DisplayNext	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::DisplayNext(int shape) {$/;"	function	line:150	class:tetris	signature:(int shape)
+InitWindows	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::InitWindows(int width, int height) {$/;"	function	line:178	class:tetris	signature:(int width, int height)
+EraseWindows	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::EraseWindows() {$/;"	function	line:207	class:tetris	signature:()
+CheckLine	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.cpp	/^void tetris::CheckLine() {$/;"	function	line:214	class:tetris	signature:()
+TETRIS_TETRIS	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.hpp	/^#define TETRIS_TETRIS$/;"	macro	line:2
+tetris	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris.hpp	/^namespace tetris {$/;"	namespace	line:5
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+TETRIS_TETRIMINO	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^#define TETRIS_TETRIMINO$/;"	macro	line:2
+tetris	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^namespace tetris {$/;"	namespace	line:4
+Dir	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };$/;"	enum	line:5	namespace:tetris
+UP	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };$/;"	enumerator	line:5	enum:tetris::Dir
+DOWN	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };$/;"	enumerator	line:5	enum:tetris::Dir
+LEFT	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };$/;"	enumerator	line:5	enum:tetris::Dir
+RIGHT	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  enum Dir { UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };$/;"	enumerator	line:5	enum:tetris::Dir
+Tetrimino	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^  class Tetrimino {$/;"	class	line:6	namespace:tetris
+init	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^    bool init = false;$/;"	member	line:14	class:tetris::Tetrimino
+center_pos	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^    std::pair<int, int> center_pos;$/;"	member	line:15	class:tetris::Tetrimino
+blocks	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^    std::vector<int> blocks;$/;"	member	line:16	class:tetris::Tetrimino
+shape	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^    int shape = -1, center_pointer = -1;$/;"	member	line:19	class:tetris::Tetrimino
+center_pointer	/home/ardenrasmussen/Programing/games/Games/game_files/tetris/tetris_class.hpp	/^    int shape = -1, center_pointer = -1;$/;"	member	line:19	class:tetris::Tetrimino
+COMPILER	/home/ardenrasmussen/Programing/games/Games/Makefile	/^export COMPILER = clang++$/;"	macro	line:5
+FLAGS	/home/ardenrasmussen/Programing/games/Games/Makefile	/^export FLAGS = -MMD -std=c++11 -w -c$/;"	macro	line:6
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:7
+TOP_DIR	/home/ardenrasmussen/Programing/games/Games/Makefile	/^TOP_DIR = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:8
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/Makefile	/^OBJ_FILES := $(shell find -name '*.o')$/;"	macro	line:9
+LINK	/home/ardenrasmussen/Programing/games/Games/Makefile	/^LINK = -lappareo -lncurses -lpessum$/;"	macro	line:10
+NAME	/home/ardenrasmussen/Programing/games/Games/Makefile	/^NAME = game$/;"	macro	line:11
+main	/home/ardenrasmussen/Programing/games/Games/source.cpp	/^int main(int argc, char const* argv[]) {$/;"	function	line:4	signature:(int argc, char const* argv[])
+MainMenu	/home/ardenrasmussen/Programing/games/Games/game_files/core.cpp	/^void game::MainMenu() {$/;"	function	line:11	class:game	signature:()
+CPP_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^CPP_FILES = $(wildcard *.cpp)$/;"	macro	line:1
+OBJ_FILES	/home/ardenrasmussen/Programing/games/Games/game_files/Makefile	/^OBJ_FILES = $(notdir $(CPP_FILES:.cpp=.o))$/;"	macro	line:2
+PACMAN_PACMAN_HPP	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.hpp	/^#define PACMAN_PACMAN_HPP$/;"	macro	line:2
+pacman	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.hpp	/^namespace pacman {$/;"	namespace	line:4
+pacman	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^namespace pacman {$/;"	namespace	line:10	file:
+grid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^  std::vector<std::vector<int>> grid;$/;"	member	line:11	namespace:pacman	file:
+Game	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::Game() {}$/;"	function	line:14	class:pacman	signature:()
+LoadGrid	/home/ardenrasmussen/Programing/games/Games/game_files/pacman/pacman.cpp	/^void pacman::LoadGrid() {$/;"	function	line:16	class:pacman	signature:()
