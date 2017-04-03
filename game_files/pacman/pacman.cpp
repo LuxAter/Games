@@ -40,15 +40,26 @@ void pacman::DisplayGrid() {
     for (int j = 0; j < 30; j++) {
       if (last_grid[i][j] != grid[i][j]) {
         last_grid[i][j] = grid[i][j];
-        // Print here!
+        std::string str = " ";
+        if(grid[i][j] == 0){
+          str = "*";
+        } else if(grid[i][j] == 1){
+          str = "#";
+        } else if(grid[i][j] == 2){
+          str = " ";
+        } else if(grid[i][j] == 3){
+          str = "X";
+        }
+        Print(str, i + 1, j + 1, win, false);
       }
     }
   }
+  windows[win].Update();
 }
 
 void pacman::LoadGrid() {
   grid.clear();
-  last_grid = std::vector<std::vector<int>>(28, std::vector<int>(30, 0));
+  last_grid = std::vector<std::vector<int>>(30, std::vector<int>(28, 0));
   std::ifstream load_grid("pacman_grid.txt");
   if (load_grid.is_open()) {
     std::string in;
