@@ -9,17 +9,17 @@ all: $(OBJ_FILES) subsystem
 
 .PHONY : subsystem
 subsystem:
-	@printf "\n=====>Four In A Row<=====\n\n"
+	@printf "\n=====>Four In A Row<=====\n"
 	@cd four_in_a_row && $(MAKE)
 	@printf "\n=====>Maze<=====\n\n"
-	@cd maze && $(MAKE)
+	#@cd maze && $(MAKE)
 	@printf "\n=====>Mine Sweeper<=====\n\n"
-	@cd mine_sweeper && $(MAKE)
+	#@cd mine_sweeper && $(MAKE)
 	@printf "\n=====>Pacman<=====\n\n"
-	@cd pacman && $(MAKE)
+	#@cd pacman && $(MAKE)
 	@printf "\n=====>Snake<=====\n\n"
-	@cd snake && $(MAKE)
+	#@cd snake && $(MAKE)
 	@printf "\n=====>Tetris<=====\n\n"
-	@cd tetris && $(MAKE)
+	#@cd tetris && $(MAKE)
 	@printf "\n=====>Tic Tac Toe<=====\n\n"
-	@cd tic_tac_toe && $(MAKE)
+	#@cd tic_tac_toe && $(MAKE)

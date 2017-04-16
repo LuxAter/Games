@@ -1,11 +1,9 @@
-#include <appareo.h>
+#include <ostendo.h>
 #include "game_files/core.hpp"
 
 int main(int argc, char const* argv[]) {
-  appareo::InitializeAppareo(true);
-  setlocale(LC_ALL, "");
-  timeout(1);
+  ostendo::InitOstendo(true, 1);
   game::MainMenu();
-  appareo::TerminateAppareo();
+  ostendo::TermOstendo();
   return 0;
 }

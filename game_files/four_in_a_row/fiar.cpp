@@ -1,11 +1,8 @@
-#include <appareo.h>
+#include <ostendo.h>
 #include <pessum.h>
 #include "fiar.hpp"
 
-using namespace appareo;
-using namespace appareo::curse;
-using namespace appareo::curse::out;
-using namespace appareo::induco;
+using namespace ostendo;
 
 namespace fiar {
   std::vector<std::vector<int>> grid;
@@ -14,75 +11,57 @@ namespace fiar {
 void fiar::Game() {
   int width = 6, height = 6, win_length = 4;
   bool ai = true;
-  std::vector<Field> fields;
-  Field new_field;
-  new_field.name = "Width";
-  new_field.type = 1;
-  new_field.sval = std::to_string(width);
-  fields.push_back(new_field);
-  new_field.name = "Height";
-  new_field.type = 1;
-  new_field.sval = std::to_string(height);
-  fields.push_back(new_field);
-  new_field.name = "Length";
-  new_field.type = 1;
-  new_field.sval = std::to_string(win_length);
-  fields.push_back(new_field);
-  new_field.name = "AI";
-  new_field.type = 3;
-  new_field.bval = ai;
-  fields.push_back(new_field);
+  std::vector<Var> fields = {Var("Width", width), Var("Height", height), Var("Length", win_length), Var("AI", ai)};
   while (Run(width, height + 1, win_length, ai) == true) {
-    fields = NewForm(fields, "New Game", scrwidth / 2, 6);
-    width = fields[0].ival;
-    height = fields[1].ival;
-    win_length = fields[2].ival;
-    ai = fields[3].bval;
-    if (width * 2 + 1 > scrwidth) {
-      width = (scrwidth - 1) / 2;
+    Window win(0.5, 0.5, 0.25, 0.25);
+    win.ToggleBorder();
+    win.ToggleTitle("Four In A Row");
+    fields = Form(win, fields);
+    win.DelWin();
+    width = fields[0].Int();
+    height = fields[1].Int();
+    win_length = fields[2].Int();
+    ai = fields[3].Bool();
+    if (width * 2 + 1 > std_scr.w) {
+      width = (std_scr.w - 1) / 2;
     }
-    if ((height + 1) * 2 + 1 > scrheight) {
-      height = (scrheight - 1) / 2;
+    if ((height + 1) * 2 + 1 > std_scr.h) {
+      height = (std_scr.h - 1) / 2;
     }
   }
 }
 
 bool fiar::Run(int width, int height, int win_length, bool ai) {
-  int win = windows.size();
-  InitializeWindow();
-  windows[win].CreateWindow("grid", (width * 2) + 1, (height * 2) + 1, -1,
-                            (scrheight - (height * 2 + 1)) / 2, true, false);
-  int pl_win = windows.size();
-  InitializeWindow();
-  if ((width * 2) - 1 < 15) {
-    windows[pl_win].CreateWindow("Four In A Row", 15, 3, -1,
-                                 (scrheight - (height * 2 + 1)) / 2 - 3, true,
-                                 true);
-  } else {
-    windows[pl_win].CreateWindow("Four In A Row", (width * 2) + 1, 3, -1,
-                                 (scrheight - (height * 2 + 1)) / 2 - 3, true,
-                                 true);
+  Window win((width * 2) + 1, (height * 2) + 1, (std_scr.w - (width * 2 + 1)) / 2, (std_scr.h - (height * 2 + 1)) / 2);
+  win.ToggleBorder();
+  Window pl_win;
+  if((width * 2) - 1 < 15){
+    pl_win = Window(15, 3, (std_scr.w - 15) / 2, (std_scr.h - (height * 2 + 1)) / 2 - 3);
+  }else{
+    pl_win = Window((width * 2) + 1, 3, (std_scr.w - (width * 2 + 1)) / 2, (std_scr.h - (height * 2 + 1)) / 2 - 3);
   }
+  pl_win.ToggleBorder();
+  pl_win.ToggleTitle("Four in A Row");
   for (int i = 2; i < height * 2; i += 2) {
-    wmove(windows[win].windowpointer, i, 0);
-    waddch(windows[win].windowpointer, ACS_LTEE);
-    whline(windows[win].windowpointer, ACS_HLINE, (width * 2) - 1);
-    wmove(windows[win].windowpointer, i, width * 2);
-    waddch(windows[win].windowpointer, ACS_RTEE);
+    wmove(win(), i, 0);
+    waddch(win(), ACS_LTEE);
+    whline(win(), ACS_HLINE, (width * 2) - 1);
+    wmove(win(), i, width * 2);
+    waddch(win(), ACS_RTEE);
   }
   for (int i = 2; i < width * 2; i += 2) {
-    wmove(windows[win].windowpointer, 1, i);
-    wvline(windows[win].windowpointer, ACS_VLINE, (height * 2) - 1);
-    wmove(windows[win].windowpointer, height * 2, i);
-    waddch(windows[win].windowpointer, ACS_BTEE);
+    wmove(win(), 1, i);
+    wvline(win(), ACS_VLINE, (height * 2) - 1);
+    wmove(win(), height * 2, i);
+    waddch(win(), ACS_BTEE);
   }
   for (int i = 2; i < width * 2; i += 2) {
     for (int j = 2; j < height * 2; j += 2) {
-      wmove(windows[win].windowpointer, j, i);
-      waddch(windows[win].windowpointer, ACS_PLUS);
+      wmove(win(), j, i);
+      waddch(win(), ACS_PLUS);
     }
   }
-  windows[win].Update();
+  win.Update();
   int pos = width / 2, player = 1;
   grid = std::vector<std::vector<int>>(width, std::vector<int>(height, 0));
   bool running = true, update = true;
@@ -90,21 +69,16 @@ bool fiar::Run(int width, int height, int win_length, bool ai) {
     if (update == true) {
       update = false;
       DrawGrid(width, height, win, pos);
-      if (player == 1) {
-        windows[pl_win].Clear();
-        PrintZ("Player 1", 5, pl_win);
-      } else if (player == 2) {
-        windows[pl_win].Clear();
-        PrintZ("Player 2", 5, pl_win);
-      }
+      pl_win.Clear();
+      pl_win.Print("#cPlayer %i", player);
     }
     int in = getch();
     if (in == int('q')) {
       player = 4;
       running = false;
     } else if (in == int(' ')) {
-      TerminateWindow(pl_win);
-      TerminateWindow(win);
+      pl_win.DelWin();
+      win.DelWin();
       return (true);
     } else if (in == KEY_RIGHT && pos < width - 1) {
       pos++;
@@ -155,40 +129,40 @@ bool fiar::Run(int width, int height, int win_length, bool ai) {
       running = false;
     }
   }
-  windows[pl_win].Clear();
-  if (player == 1) {
-    PrintZ("Player 1 Wins", 5, pl_win);
-  } else if (player == 2) {
-    PrintZ("Player 2 Wins", 5, pl_win);
+  pl_win.Clear();
+  if (player == 1 || player == 2) {
+    pl_win.Print("#cPlayer %i Wins", player);
   } else if (player == 3) {
-    PrintZ("Draw", 5, pl_win);
+    pl_win.Print("#cDraw");
   }
   DrawGrid(width, height, win, -1);
   while (player != 4 && getch() == ERR) {
   }
-  TerminateWindow(pl_win);
-  TerminateWindow(win);
+  pl_win.DelWin();
+  win.DelWin();
   return (false);
 }
 
-void fiar::DrawGrid(int width, int height, int win, int pos) {
+void fiar::DrawGrid(int width, int height, Window win, int pos) {
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
       if (i == pos && j == 0) {
-        SetAtt({BLUE_BACK}, win);
+        win.ColorOn(4);
       }
       if (grid[i][j] < 0) {
-        SetAtt({GREEN_BACK}, win);
+        win.ColorOn(2);
       } else if (grid[i][j] == 1) {
-        SetAtt({YELLOW_BACK}, win);
+        win.ColorOn(3);
       } else if (grid[i][j] == 2) {
-        SetAtt({RED_BACK}, win);
+        win.ColorOn(1);
+      } else{
+        win.ColorOn(0);
       }
-      Print(" ", (j * 2) + 1, (i * 2) + 1, win);
-      SetAtt({NORMAL}, win);
+      win.SetCurs(j * 2 + 1, i * 2 + 1);
+      win.Print(" ");
     }
   }
-  windows[win].Update();
+  win.Update();
 }
 
 void fiar::Pause(int tics) {
