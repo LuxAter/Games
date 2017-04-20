@@ -14,26 +14,24 @@ void maze::Grid::Init(int sizex, int sizey, bool winc) {
   score = 0;
   wincheck = winc;
   if (winc == true) {
-    win = windows.size();
-    InitializeWindow();
-    if (sizex >= scrwidth - 2 && sizey >= scrheight - 2) {
-      windows[win].CreateWindow("Maze", scrwidth, scrheight - 3, -1, 3);
-    } else if (sizex >= scrwidth - 2 && sizey < scrheight - 2) {
-      windows[win].CreateWindow("Maze", scrwidth, sizey + 2, -1,
-                                (scrheight - sizey + 2) / 2);
-    } else if (sizex < scrwidth - 2 && sizey >= scrheight - 2) {
-      windows[win].CreateWindow("Maze", sizex + 2, scrheight - 3, -1, 3);
+    if (sizex >= std_scr.w - 2 && sizey >= std_scr.h - 2) {
+      win = Window(std_scr.w, std_scr.h - 3, 0, 3);
+    } else if (sizex >= std_scr.w - 2 && sizey < std_scr.h - 2) {
+      win = Window(std_scr.w, sizey + 2, 0, (std_scr.h - sizey + 2) / 2);
+    } else if (sizex < std_scr.w - 2 && sizey >= std_scr.h - 2) {
+      win = Window(sizex + 2, std_scr.h - 3, (std_scr.w - (sizex + 2)) / 2, 3);
     } else {
-      windows[win].CreateWindow("Maze", sizex + 2, sizey + 2, -1,
-                                (scrheight - sizey + 2) / 2);
+      win = Window(sizex + 2, sizey + 2, (std_scr.w - (sizex + 2)) / 2,
+                   (std_scr.h - (sizey + 2)) / 2);
     }
-    countwin = windows.size();
-    InitializeWindow();
-    windows[countwin].CreateWindow("Move Count", scrwidth, 3, -1, 0, true,
-                                   true);
+    win.ToggleBorder();
+    win.ToggleTitle("Maze");
+    count_win = Window(std_scr.w, 3, 0, 0);
+    count_win.ToggleBorder();
+    count_win.ToggleTitle("Move Count");
 
     std::vector<std::vector<int>> dispgrid(
-        windows[win].width - 2, std::vector<int>(windows[win].height - 2, -5));
+        win.window_space.w, std::vector<int>(win.window_space.h, -5));
     lastdispgrid = dispgrid;
   }
   width = sizex;
@@ -53,9 +51,9 @@ bool maze::Grid::CheckPos(int x, int y) {
 void maze::Grid::Show() {
   if (dispx != lastdispx || dispy != lastdispy) {
     std::vector<std::vector<int>> dispgrid(
-        windows[win].width - 2, std::vector<int>(windows[win].height - 2, 0));
-    for (int i = dispx; i < dispx + windows[win].width - 2; i++) {
-      for (int j = dispy; j < dispy + windows[win].height - 2; j++) {
+        win.window_space.w, std::vector<int>(win.window_space.h, 0));
+    for (int i = dispx; i < dispx + win.window_space.w; i++) {
+      for (int j = dispy; j < dispy + win.window_space.h; j++) {
         dispgrid[i - dispx][j - dispy] = grid[i][j];
         if (i == width - 2 && j == height - 2) {
           dispgrid[i - dispx][j - dispy] = 2;
@@ -67,27 +65,32 @@ void maze::Grid::Show() {
         std::string str = " ";
         if (dispgrid[i][j] != lastdispgrid[i][j]) {
           if (dispgrid[i][j] == 0) {
-            SetAtt({WHITE_BACK}, win);
+            win.ColorOn(77);
+          } else if (dispgrid[i][j] == 1) {
+            win.ColorOn(70);
+          } else if (dispgrid[i][j] == 2) {
+            win.ColorOn(72);
+          } else if (dispgrid[i][j] == 3) {
+            win.ColorOn(74);
           }
-          if (dispgrid[i][j] == 1) {
-            SetAtt({NORMAL}, win);
+          win.Print(str, j + 1, i + 1);
+          if (dispgrid[i][j] == 0) {
+            win.ColorOff(77);
+          } else if (dispgrid[i][j] == 1) {
+            win.ColorOff(70);
+          } else if (dispgrid[i][j] == 2) {
+            win.ColorOff(72);
+          } else if (dispgrid[i][j] == 3) {
+            win.ColorOff(74);
           }
-          if (dispgrid[i][j] == 2) {
-            SetAtt({GREEN_BACK}, win);
-          }
-          if (dispgrid[i][j] == 3) {
-            SetAtt({BLUE_BACK}, win);
-          }
-          Print(str, j + 1, i + 1, win, false);
         }
       }
     }
-    SetAtt({NORMAL}, win);
-    windows[win].Update();
+    win.Update();
     lastdispx = dispx;
     lastdispy = dispy;
   }
-  PrintZ(std::to_string(score), 5, countwin);
+  count_win.Print("#c%i", score);
 }
 
 void maze::Grid::GenGrid() {
@@ -156,35 +159,35 @@ void maze::Grid::Delete() {
   width = 0;
   height = 0;
   if (wincheck == true) {
-    TerminateWindow(countwin);
-    TerminateWindow(win);
+    count_win.DelWin();
+    win.DelWin();
   }
 }
 
 void maze::Grid::ShowPos(int x, int y) {
-  SetAtt({BLUE_BACK}, win);
-  Print(" ", y + 1 - dispy, x + 1 - dispx, win);
-  SetAtt({NORMAL}, win);
+  win.ColorOn(74);
+  win.Print(" ", y + 1 - dispy, x + 1 - dispx);
+  win.ColorOff(74);
 }
 
 void maze::Grid::SetDisp(int x, int y) {
-  if (x - dispx > (windows[win].width / 2) + 10) {
+  if (x - dispx > (win.window_space.w / 2) + 10) {
     dispx += 1;
   }
-  if (y - dispy > (windows[win].height / 2) + 10) {
+  if (y - dispy > (win.window_space.h / 2) + 10) {
     dispy += 1;
   }
-  if (x - dispx < (windows[win].width / 2) - 10) {
+  if (x - dispx < (win.window_space.w / 2) - 10) {
     dispx -= 1;
   }
-  if (y - dispy < (windows[win].height / 2) - 10) {
+  if (y - dispy < (win.window_space.h / 2) - 10) {
     dispy -= 1;
   }
-  if (dispx + windows[win].width - 1 > width) {
-    dispx = width - windows[win].width + 2;
+  if (dispx + win.window_space.w - 1 > width) {
+    dispx = width - win.window_space.w;
   }
-  if (dispy + windows[win].height - 1 > height) {
-    dispy = height - windows[win].height + 2;
+  if (dispy + win.window_space.h - 1 > height) {
+    dispy = height - win.window_space.h;
   }
   if (dispx < 0) {
     dispx = 0;
@@ -205,8 +208,7 @@ std::vector<std::vector<int>> maze::Grid::GetIntVec() {
 }
 
 void maze::Grid::ErasePos(int x, int y) {
-  SetAtt({NORMAL}, win);
-  Print(" ", y + 1 - dispy, x + 1 - dispx, win, false);
+  win.Print(" ", y + 1 - dispy, x + 1 - dispx);
 }
 
 void maze::Grid::SetPos(int x, int y) { grid[x][y] = 3; }

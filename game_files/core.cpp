@@ -10,14 +10,15 @@ using namespace ostendo;
 void game::MainMenu() {
   std::map<std::string, void (*)()> games;
   games["FOUR IN A ROW"] = fiar::Game;
-  /*games["MAZE"] = maze::Game;
-  games["MINE SWEEPER"] = minesw::Game;
+  games["MAZE"] = maze::Game;
+  /*games["MINE SWEEPER"] = minesw::Game;
   games["PACMAN"] = pacman::Game;
   games["SNAKE"] = snake::Game;
   games["TETRIS"] = tetris::Game;
   games["TIC TAC TOE"] = ttt::Game;
-  
-  */std::vector<std::string> options = {"Game A", "Game b", "Game C"};
+
+  */ std::vector<std::string> options = {
+      "Game A", "Game b", "Game C"};
   for (std::map<std::string, void (*)()>::iterator it = games.begin();
        it != games.end(); ++it) {
     options.push_back(it->first);
