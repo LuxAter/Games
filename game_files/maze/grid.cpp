@@ -1,12 +1,9 @@
-#include <appareo.h>
+#include <ostendo.h>
 #include <pessum.h>
 #include <vector>
 #include "grid.hpp"
 
-using namespace appareo;
-using namespace appareo::curse;
-using namespace appareo::curse::out;
-using namespace appareo::induco;
+using namespace ostendo;
 
 void maze::Grid::Init(int sizex, int sizey, bool winc) {
   dispx = 0;

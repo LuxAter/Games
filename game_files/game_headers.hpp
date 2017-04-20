@@ -1,5 +1,5 @@
 #include "four_in_a_row/fiar.hpp"
-//#include "maze/maze.hpp"
+#include "maze/maze.hpp"
 //#include "mine_sweeper/minesw.hpp"
 //#include "pacman/pacman.hpp"
 //#include "snake/snake.hpp"

@@ -12,7 +12,7 @@ subsystem:
 	@printf "\n=====>Four In A Row<=====\n"
 	@cd four_in_a_row && $(MAKE)
 	@printf "\n=====>Maze<=====\n\n"
-	#@cd maze && $(MAKE)
+	@cd maze && $(MAKE)
 	@printf "\n=====>Mine Sweeper<=====\n\n"
 	#@cd mine_sweeper && $(MAKE)
 	@printf "\n=====>Pacman<=====\n\n"

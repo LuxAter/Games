@@ -17,7 +17,8 @@ namespace maze {
 
    private:
     bool wincheck = true;
-    int countwin, dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;
+    ostendo::Window win;
+    int dispx = 0, dispy = 0, lastdispx = -1, lastdispy = -1;
     std::vector<std::vector<int>> grid;
     std::vector<std::vector<int>> lastdispgrid;
     void GenGrid();

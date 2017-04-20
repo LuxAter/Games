@@ -1,21 +1,18 @@
-#include <appareo.h>
+#include <ostendo.h>
 #include <pessum.h>
 #include <vector>
 #include "grid.hpp"
 #include "maze.hpp"
 
-using namespace appareo;
-using namespace appareo::curse;
-using namespace appareo::curse::out;
-using namespace appareo::induco;
+using namespace ostendo;
 
 namespace maze {
   Grid grid;
 }
 
 void maze::Game() {
-  int width = scrwidth - 3;
-  int height = scrheight - 5;
+  int width = std_scr.w - 3;
+  int height = std_scr.h - 5;
   int speed = 10;
   if (width % 2 == 0) {
     width++;
@@ -23,102 +20,71 @@ void maze::Game() {
   if (height % 2 == 0) {
     height++;
   }
-  std::vector<Field> fields;
-  Field newfield;
-  newfield.name = "Width";
-  newfield.type = 1;
-  newfield.sval = std::to_string(width);
-  fields.push_back(newfield);
-  newfield.name = "Height";
-  newfield.type = 1;
-  newfield.sval = std::to_string(height);
-  fields.push_back(newfield);
-  newfield.name = "Speed";
-  newfield.type = 1;
-  newfield.sval = std::to_string(speed);
-  fields.push_back(newfield);
-  newfield.name = "Analize";
-  newfield.type = 3;
-  newfield.bval = false;
-  fields.push_back(newfield);
+  std::vector<Var> fields;
+  fields.push_back(Var("Width", width));
+  fields.push_back(Var("Height", height));
+  fields.push_back(Var("Speed", speed));
+  fields.push_back(Var("Analize", false));
   bool term = false;
   while (Run(width, height, speed) == true) {
     grid.Delete();
-    fields = NewForm(fields, "New Game", scrwidth / 2, 8);
-    width = fields[0].ival;
-    height = fields[1].ival;
-    speed = fields[2].ival;
+    Window win(0.5, 0.5, 0.25, 0.25);
+    fields = Form(win, fields);
+    width = fields[0].Int();
+    height = fields[1].Int();
+    speed = fields[2].Int();
     if (width % 2 == 0) {
       width++;
     }
     if (height % 2 == 0) {
       height++;
     }
-    if (fields[3].bval == true) {
+    if (fields[3].Bool() == true) {
       break;
     }
   }
-  if (fields[3].bval == true) {
+  if (fields[3].Bool() == true) {
+    Window win(0.5, 0.5, 0.25, 0.25);
     term = true;
     fields.clear();
-    newfield.name = "Count";
-    newfield.type = 1;
-    newfield.sval = "100";
-    fields.push_back(newfield);
-    newfield.name = "Meta";
-    newfield.type = 3;
-    newfield.bval = false;
-    fields.push_back(newfield);
-    newfield.name = "Save";
-    newfield.type = 3;
-    newfield.bval = true;
-    fields.push_back(newfield);
-    fields = NewForm(fields, "Analize Settings", scrwidth / 2, 8);
-    std::ofstream out("Output.txt");
+    fields.push_back(Var("Count", 100));
+    fields.push_back(Var("Meta", false));
+    fields.push_back(Var("Save", true));
+    fields = Form(win, fields);
+    //std::ofstream out("Output.txt");
     long double total = 0;
-    bool meta = fields[1].bval;
-    if (fields[1].bval == false) {
-      CreateProgressBar("Solving Mazes");
-      for (int i = 0; i < fields[0].ival; i++) {
-        UpdateProgressBar((double)i / (double)fields[0].ival);
+    bool meta = fields[1].Bool();
+    if (fields[1].Bool() == false) {
+      for (int i = 0; i < fields[0].Int(); i++) {
         grid.Init(width, height, false);
         AutoRun(true);
         total += grid.score;
-        if (fields[2].bval == true) {
-          out << grid.score << ",";
+        if (fields[2].Bool() == true) {
+          //out << grid.score << ",";
         }
         grid.Delete();
       }
-      total /= fields[0].ival;
-      out << ":\n" << total;
-      TerminateProgressBar();
-    } else if (fields[1].bval == true) {
-      int count = fields[0].ival;
+      total /= fields[0].Int();
+      //out << ":\n" << total;
+    } else if (fields[1].Bool() == true) {
+      int count = fields[0].Int();
       fields.clear();
-      newfield.name = "Min Size";
-      newfield.type = 1;
-      newfield.sval = "10";
-      fields.push_back(newfield);
-      newfield.name = "Max Size";
-      newfield.type = 1;
-      newfield.sval = "100";
-      fields.push_back(newfield);
-      fields = NewForm(fields, "Meta Settings", scrwidth / 2, 8);
-      if (fields[0].ival % 2 == 0) {
-        fields[0].ival++;
+      fields.push_back(Var("Min Size", 10));
+      fields.push_back(Var("Max Size", 100));
+      fields = Form(win, fields);
+      if (fields[0].Int() % 2 == 0) {
+        fields[0].int_value++;
       }
-      if (fields[1].ival % 2 == 0) {
-        fields[1].ival++;
+      if (fields[1].Int() % 2 == 0) {
+        fields[1].int_value++;
       }
-      int totalmazes = (fields[1].ival - fields[0].ival) / 2;
+      int totalmazes = (fields[1].Int() - fields[0].Int()) / 2;
       totalmazes *= count;
       int index = 1;
-      CreateProgressBar("Solving Mazes");
-      for (int i = fields[0].ival; i <= fields[1].ival; i += 2) {
+      for (int i = fields[0].Int(); i <= fields[1].Int(); i += 2) {
         total = 0;
-        out << i << "x" << i;
+        //out << i << "x" << i;
         for (int j = 0; j < count; j++) {
-          UpdateProgressBar((double)index / (double)totalmazes);
           grid.Init(i, i, false);
           AutoRun(true);
           total += grid.score;
@@ -126,20 +92,19 @@ void maze::Game() {
           index++;
         }
         total /= (double)count;
-        out << ":" << total << "\n";
+        //out << ":" << total << "\n";
       }
-      TerminateProgressBar();
     }
-    out.close();
+    //out.close();
     if (meta == false) {
       int scorewindow = windows.size();
-      InitializeWindow();
-      windows[scorewindow].CreateWindow("Average Moves", scrwidth / 5, 3, -1,
-                                        -1, true, true);
-      PrintZ(std::to_string(total), 5, scorewindow);
+      Window score_win(0.5, 0.5, 0.25, 0.25);
+      score_win.ToggleBorder();
+      score_win.ToggleTitle("Average Moves");
+      score_win.Print("#c%f", total);
       while (getch() == ERR) {
       }
-      TerminateWindow(scorewindow);
+      score_win.DelWin();
     }
   }
   if (term == false) {
@@ -343,11 +308,11 @@ void maze::AutoRun(bool fast, int speed) {
 
 void maze::Score() {
   int scorewindow = windows.size();
-  InitializeWindow();
-  windows[scorewindow].CreateWindow("SCORE", scrwidth / 5, 3, -1, -1, true,
-                                    true);
-  PrintZ(std::to_string(grid.score), 5, scorewindow);
+  //InitializeWindow();
+  //windows[scorewindow].CreateWindow("SCORE", scrwidth / 5, 3, -1, -1, true,
+  //                                  true);
+  //PrintZ(std::to_string(grid.score), 5, scorewindow);
   while (getch() == ERR) {
   }
-  TerminateWindow(scorewindow);
+  //TerminateWindow(scorewindow);
 }
