@@ -33,7 +33,6 @@ void fiar::Game() {
 
 bool fiar::Run(int width, int height, int win_length, bool ai) {
   Window win((width * 2) + 1, (height * 2) + 1, (std_scr.w - (width * 2 + 1)) / 2, (std_scr.h - (height * 2 + 1)) / 2);
-  win.ToggleBorder();
   Window pl_win;
   if((width * 2) - 1 < 15){
     pl_win = Window(15, 3, (std_scr.w - 15) / 2, (std_scr.h - (height * 2 + 1)) / 2 - 3);
@@ -42,6 +41,8 @@ bool fiar::Run(int width, int height, int win_length, bool ai) {
   }
   pl_win.ToggleBorder();
   pl_win.ToggleTitle("Four in A Row");
+  
+  win.ToggleBorder();
   for (int i = 2; i < height * 2; i += 2) {
     wmove(win(), i, 0);
     waddch(win(), ACS_LTEE);
@@ -61,6 +62,7 @@ bool fiar::Run(int width, int height, int win_length, bool ai) {
       waddch(win(), ACS_PLUS);
     }
   }
+  //win.ToggleBorder();
   win.Update();
   int pos = width / 2, player = 1;
   grid = std::vector<std::vector<int>>(width, std::vector<int>(height, 0));
@@ -155,11 +157,19 @@ void fiar::DrawGrid(int width, int height, Window win, int pos) {
         win.ColorOn(3);
       } else if (grid[i][j] == 2) {
         win.ColorOn(1);
-      } else{
-        win.ColorOn(0);
       }
       win.SetCurs(j * 2 + 1, i * 2 + 1);
       win.Print(" ");
+      if(i == pos && j == 0){
+        win.ColorOff(4);
+      }
+      if(grid[i][j] < 0){
+        win.ColorOff(2);
+      } else if(grid[i][j] == 1){
+        win.ColorOff(3);
+      } else if(grid[i][j] == 2){
+        win.ColorOff(1);
+      }
     }
   }
   win.Update();
