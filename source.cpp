@@ -11,6 +11,7 @@ void Test(){
 }
 
 int main(int argc, char const* argv[]) {
+  srand(time(NULL));
   ostendo::InitOstendo(true, 1);
   std::map<std::string, void(*)()> games;
   std::vector<std::string> options;
@@ -28,6 +29,7 @@ int main(int argc, char const* argv[]) {
     win.ToggleBorder();
     win.ToggleTitle("OpenSource-Games");
     input = ostendo::Menu(win, options);
+    win.DelWin();
     if(input != "Quit"){
       std::map<std::string, void(*)()>::iterator it = games.find(input);
       if(it != games.end()){

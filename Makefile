@@ -26,7 +26,7 @@ $(NAME): $(TOP_DIR) $(OBJ_FILES)
 
 .PHONY : subsystem
 subsystem:
-	@setterm -fore blue; printf "$(shell pwd)/games:\n"; setterm -fore white
+	@setterm -fore cyan; printf "$(shell pwd)/games:\n"; setterm -fore white
 	@cd games && $(MAKE)
 
 .PHONY : clean
